@@ -1,0 +1,162 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "type": "freelancer",
+      "firstName": "Carlos",
+      "lastName": "Rodríguez",
+      "email": "freelancer@camello.co",
+      "username": "carlosdev",
+      "password": "Freelancer123",
+      "skills": ["Desarrollo Web", "JavaScript", "React", "Node.js", "UI/UX"],
+      "rating": 4.8,
+      "projectsCompleted": 27,
+      "memberSince": "2022-03-15",
+      "profileImage": "profile-carlos.jpg",
+      "bio": "Desarrollador Full Stack con 5 años de experiencia en aplicaciones web y móviles.",
+      "location": "Bogotá, Colombia",
+      "hourlyRate": 35,
+      "availability": "Tiempo parcial",
+      "languages": ["Español", "Inglés"],
+      "education": [
+        {
+          "institution": "Universidad Nacional de Colombia",
+          "degree": "Ingeniería de Sistemas",
+          "year": "2018"
+        }
+      ],
+      "certifications": ["AWS Certified Developer", "MongoDB Certified Developer"],
+      "portfolio": [
+        {
+          "title": "E-commerce para productos artesanales",
+          "description": "Plataforma completa con pasarela de pagos y gestión de inventario",
+          "url": "https://artesanias-colombia.com",
+          "image": "project1.jpg"
+        },
+        {
+          "title": "App de delivery para restaurantes locales",
+          "description": "Aplicación móvil con geolocalización y seguimiento en tiempo real",
+          "url": "https://rapidoapp.co",
+          "image": "project2.jpg"
+        }
+      ],
+      "socialProfiles": {
+        "linkedin": "https://linkedin.com/in/carlosrodriguez",
+        "github": "https://github.com/carlosdev",
+        "twitter": "https://twitter.com/carlosdev"
+      },
+      "preferences": {
+        "projectTypes": ["Desarrollo Web", "Aplicaciones Móviles"],
+        "remoteOnly": true,
+        "notificationSettings": {
+          "email": true,
+          "sms": false,
+          "projectAlerts": true
+        }
+      },
+      "bankInfo": {
+        "accountType": "Ahorros",
+        "accountNumber": "************1234",
+        "bank": "Bancolombia"
+      },
+      "verificationStatus": "verified",
+      "lastLogin": "2023-05-18T09:30:45Z"
+    },
+    {
+      "id": 2,
+      "type": "company",
+      "firstName": "Ana",
+      "lastName": "Gómez",
+      "email": "empresa@camello.co",
+      "password": "Empresa123",
+      "companyName": "InnovaTech Colombia",
+      "industry": "Tecnología",
+      "employeeCount": 25,
+      "projectsPosted": 15,
+      "memberSince": "2021-11-10",
+      "companyLogo": "innovatech-logo.png",
+      "description": "Empresa de desarrollo de software especializada en soluciones empresariales y aplicaciones móviles.",
+      "location": "Medellín, Colombia",
+      "website": "https://innovatech.co",
+      "contactPhone": "+57 300 123 4567",
+      "taxId": "901.234.567-8",
+      "companySize": "Pequeña (11-50 empleados)",
+      "foundedYear": 2018,
+      "activeProjects": [
+        {
+          "id": 101,
+          "title": "Desarrollo de plataforma e-learning",
+          "budget": "$5,000 - $8,000",
+          "deadline": "2023-07-30",
+          "status": "En progreso"
+        },
+        {
+          "id": 102,
+          "title": "Aplicación móvil para gestión de inventario",
+          "budget": "$3,000 - $4,500",
+          "deadline": "2023-08-15",
+          "status": "Buscando freelancers"
+        }
+      ],
+      "paymentMethods": ["Transferencia bancaria", "PayPal"],
+      "verificationStatus": "verified",
+      "subscriptionPlan": "Premium",
+      "subscriptionExpiry": "2023-12-31",
+      "preferences": {
+        "freelancerSkills": ["Desarrollo Web", "Diseño UI/UX", "Desarrollo Móvil"],
+        "notificationSettings": {
+          "email": true,
+          "sms": true,
+          "applicationAlerts": true
+        }
+      },
+      "lastLogin": "2023-05-19T14:45:22Z"
+    },
+    {
+      "id": 3,
+      "type": "admin",
+      "firstName": "Javier",
+      "lastName": "Martínez",
+      "email": "admin@camello.co",
+      "username": "admin_daniel",
+      "password": "Admin123",
+      "role": "Super Admin",
+      "permissions": [
+        "user_management",
+        "content_management",
+        "system_settings",
+        "analytics",
+        "financial_management",
+        "support_tickets",
+        "moderation"
+      ],
+      "adminLevel": 1,
+      "department": "Tecnología",
+      "employeeId": "ADM-001",
+      "lastLogin": "2023-05-20T14:30:45Z",
+      "accountCreated": "2021-01-05",
+      "profileImage": "admin-javier.jpg",
+      "contactPhone": "+57 311 987 6543",
+      "emergencyContact": {
+        "name": "María Martínez",
+        "relationship": "Hermana",
+        "phone": "+57 300 765 4321"
+      },
+      "accessLog": [
+        {
+          "action": "User ban",
+          "timestamp": "2023-05-15T10:23:15Z",
+          "details": "Banned user ID 456 for terms violation"
+        },
+        {
+          "action": "System update",
+          "timestamp": "2023-05-10T08:45:30Z",
+          "details": "Updated payment gateway integration"
+        }
+      ],
+      "twoFactorEnabled": true,
+      "ipRestrictions": ["190.25.XX.XX", "181.60.XX.XX"],
+      "status": "active"
+    }
+  ]
+}

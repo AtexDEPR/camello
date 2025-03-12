@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso - Camello | La Plataforma Freelance de Colombia</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./login.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        camel: {
+                            tan: '#D2B48C',
+                            lightBeige: '#F6ECD4',
+                            goldenBeige: '#DBC29D',
+                            cream: '#FFF9E8',
+                            white: '#FFFFFF',
+                            black: '#000000'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 0.8s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'slide-right': 'slideRight 0.8s ease-out forwards',
+                        'scale-in': 'scaleIn 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideRight: {
+                            '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        scaleIn: {
+                            '0%': { transform: 'scale(0.9)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        }
+                    },
+                    backgroundImage: {
+                        'circuit-pattern': "url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23DBC29D' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+                        'tech-pattern': "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23DBC29D' fill-opacity='0.1'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        /* Custom animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideRight {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-right {
+            animation: slideRight 0.8s ease-out forwards;
+        }
+        
+        .animate-scale-in {
+            animation: scaleIn 0.8s ease-out forwards;
+        }
+        
+        /* Staggered animation delay */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #D2B48C, #DBC29D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        /* Circuit board animation */
+        .circuit-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 3s linear forwards;
+        }
+        
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-camel-cream text-camel-black font-sans min-h-screen">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 glass border-b border-camel-tan/20">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <!-- Logo -->
+                <div class="relative w-10 h-10 bg-gradient-to-br from-camel-tan to-camel-goldenBeige rounded-lg flex items-center justify-center text-camel-white font-bold shadow-lg overflow-hidden">
+                    <div class="absolute inset-0 bg-circuit-pattern opacity-20"></div>
+                    <span class="relative z-10">C</span>
+                    <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-camel-cream rounded-full animate-pulse-slow"></div>
+                </div>
+                <span class="text-2xl font-bold gradient-text">Camello</span>
+            </a>
+            
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="index.html#features" class="text-camel-black hover:text-camel-tan transition-colors relative group">
+                    Características
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-camel-tan transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="index.html#about" class="text-camel-black hover:text-camel-tan transition-colors relative group">
+                    Nosotros
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-camel-tan transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="index.html#mission" class="text-camel-black hover:text-camel-tan transition-colors relative group">
+                    Misión y Visión
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-camel-tan transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="index.html#contact" class="text-camel-black hover:text-camel-tan transition-colors relative group">
+                    Contacto
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-camel-tan transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </nav>
+            
+            <div class="flex items-center gap-4">
+                <a href="login.html" class="relative overflow-hidden group bg-camel-black text-camel-white px-5 py-2.5 rounded-lg transition-all duration-300 hover:bg-camel-black/90 shadow-md">
+                    <span class="relative z-10">Iniciar Sesión</span>
+                    <span class="absolute inset-0 w-0 bg-camel-tan/20 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <button id="mobile-menu-button" class="md:hidden text-camel-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-b border-camel-tan/20">
+            <div class="container mx-auto px-4 py-4 space-y-4">
+                <a href="index.html#features" class="block text-camel-black hover:text-camel-tan transition-colors">Características</a>
+                <a href="index.html#about" class="block text-camel-black hover:text-camel-tan transition-colors">Nosotros</a>
+                <a href="index.html#mission" class="block text-camel-black hover:text-camel-tan transition-colors">Misión y Visión</a>
+                <a href="index.html#contact" class="block text-camel-black hover:text-camel-tan transition-colors">Contacto</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative py-16 min-h-[calc(100vh-80px)]">
+        <!-- Background elements -->
+        <div class="absolute inset-0 bg-tech-pattern"></div>
+        <div class="absolute top-20 right-20 w-64 h-64 bg-camel-tan rounded-full opacity-10 blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-10 left-10 w-80 h-80 bg-camel-goldenBeige rounded-full opacity-10 blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-6xl mx-auto">
+                <!-- Tabs -->
+                <div class="flex justify-center mb-8">
+                    <div class="inline-flex p-1 bg-camel-lightBeige rounded-lg">
+                        <button id="tab-login" class="px-6 py-2 rounded-md bg-camel-tan text-camel-white font-medium">Iniciar Sesión</button>
+                        <button id="tab-register" class="px-6 py-2 rounded-md text-camel-black font-medium">Registrarse</button>
+                    </div>
+                </div>
+                
+                <!-- Login Form -->
+                <div id="content-login" class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="animate-slide-up">
+                        <div class="bg-camel-white p-8 rounded-xl shadow-xl border border-camel-tan/10">
+                            <h2 class="text-2xl font-bold text-camel-black mb-6">Iniciar Sesión</h2>
+                            <form id="login-form" class="space-y-6">
+                                <div>
+                                    <label for="login-email" class="block text-sm font-medium text-camel-black mb-1">Correo Electrónico</label>
+                                    <input type="email" id="login-email" name="email" required class="w-full px-4 py-2.5 bg-camel-cream border border-camel-tan/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-camel-tan/50">
+                                </div>
+                                
+                                <div>
+                                    <label for="login-password" class="block text-sm font-medium text-camel-black mb-1">Contraseña</label>
+                                    <input type="password" id="login-password" name="password" required class="w-full px-4 py-2.5 bg-camel-cream border border-camel-tan/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-camel-tan/50">
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="remember-me" class="h-4 w-4 text-camel-tan border-camel-tan/30 rounded focus:ring-camel-tan/50">
+                                        <label for="remember-me" class="ml-2 block text-sm text-camel-black">Recordarme</label>
+                                    </div>
+                                    
+                                    <a href="#" class="text-sm text-camel-tan hover:text-camel-black transition-colors">¿Olvidaste tu contraseña?</a>
+                                </div>
+                                
+                                <button type="submit" class="w-full bg-camel-black text-camel-white py-2.5 px-4 rounded-lg hover:bg-camel-black/90 transition-colors relative overflow-hidden group">
+                                    <span class="relative z-10">Iniciar Sesión</span>
+                                    <span class="absolute inset-0 w-0 bg-camel-tan/20 transition-all duration-300 group-hover:w-full"></span>
+                                </button>
+                            </form>
+                            
+                            <div class="mt-6">
+                                <div class="relative">
+                                    <div class="absolute inset-0 flex items-center">
+                                        <div class="w-full border-t border-camel-tan/20"></div>
+                                    </div>
+                                    <div class="relative flex justify-center text-sm">
+                                        <span class="px-2 bg-camel-white text-camel-black/70">O continúa con</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-6 grid grid-cols-2 gap-3">
+                                    <button class="w-full flex items-center justify-center gap-2 bg-camel-cream text-camel-black py-2.5 px-4 rounded-lg hover:bg-camel-lightBeige transition-colors border border-camel-tan/20">
+                                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                                        </svg>
+                                        Google
+                                    </button>
+                                    <button class="w-full flex items-center justify-center gap-2 bg-camel-cream text-camel-black py-2.5 px-4 rounded-lg hover:bg-camel-lightBeige transition-colors border border-camel-tan/20">
+                                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                                        </svg>
+                                        Facebook
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <p class="mt-6 text-center text-sm text-camel-black/70">
+                                ¿No tienes una cuenta?
+                                <button id="switch-to-register" class="text-camel-tan hover:text-camel-black transition-colors font-medium">Regístrate</button>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="hidden md:block relative h-[500px] animate-float">
+                        <!-- Login illustration -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-camel-lightBeige to-camel-cream rounded-xl shadow-xl overflow-hidden border border-camel-tan/20 flex items-center justify-center">
+                            <div class="relative w-4/5 h-4/5">
+                                <!-- Stylized login illustration -->
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="relative w-64 h-64">
+                                        <!-- Circular elements -->
+                                        <div class="absolute inset-0 rounded-full border-4 border-camel-tan/30 animate-spin-slow"></div>
+                                        <div class="absolute inset-4 rounded-full border-4 border-camel-tan/40 animate-spin-slow" style="animation-direction: reverse;"></div>
+                                        <div class="absolute inset-8 rounded-full border-4 border-camel-tan/50 animate-spin-slow"></div>
+                                        
+                                        <!-- Center element -->
+                                        <div class="absolute inset-12 bg-camel-white rounded-full shadow-xl flex items-center justify-center">
+                                            <div class="relative w-20 h-20 bg-gradient-to-br from-camel-tan to-camel-goldenBeige rounded-full flex items-center justify-center text-camel-white">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                    <circle cx="12" cy="7" r="4"></circle>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Orbiting elements -->
+                                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-camel-tan rounded-full"></div>
+                                        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-6 h-6 bg-camel-tan rounded-full"></div>
+                                        <div class="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-camel-tan rounded-full"></div>
+                                        <div class="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-camel-tan rounded-full"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Connection lines -->
+                                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                                    <path class="circuit-line" d="M50,200 L150,200" stroke="#D2B48C" stroke-width="1" stroke-dasharray="5,5"/>
+                                    <path class="circuit-line" d="M250,200 L350,200" stroke="#D2B48C" stroke-width="1" stroke-dasharray="5,5"/>
+                                    <path class="circuit-line" d="M200,50 L200,150" stroke="#D2B48C" stroke-width="1" stroke-dasharray="5,5"/>
+                                    <path class="circuit-line" d="M200,250 L200,350" stroke="#D2B48C" stroke-width="1" stroke-dasharray="5,5"/>
+                                </svg>
+                                
+                                <!-- Text elements -->
+                                <div class="absolute bottom-4 right-4 bg-camel-white rounded-lg px-4 py-2 text-sm font-medium text-camel-black border border-camel-tan/20 shadow-md">
+                                    Acceso Seguro
+                                </div>
+                                <div class="absolute top-4 left-4 bg-camel-white rounded-lg px-4 py-2 text-sm font-medium text-camel-black border border-camel-tan/20 shadow-md">
+                                    Camello Platform
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Decorative elements -->
+                        <div class="absolute -right-6 top-1/4 w-12 h-12 bg-camel-tan rounded-lg rotate-12 animate-float" style="animation-delay: 1s;"></div>
+                        <div class="absolute -left-6 bottom-1/4 w-12 h-12 bg-camel-goldenBeige rounded-full animate-float" style="animation-delay: 1.5s;"></div>
+                    </div>
+                </div>
+                
+                <!-- Register Form -->
+                <div id="content-register" class="hidden grid md:grid-cols-2 gap-12 items-center">
+                    <div class="animate-slide-up">
+                        <div class="bg-camel-white p-8 rounded-xl shadow-xl border border-camel-tan/10">
+                            <h2 class="text-2xl font-bold text-camel-black mb-6">Crear una cuenta</h2>
+                            <form id="register-form" class="space-y-5">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="register-firstname" class="block text-sm font-medium text-camel-black mb-1">Nombre</label>
+                                        <input type="text" id="register-firstname" name="firstname" required class="w-full px-4 py-2.5 bg-camel-cream border border-camel-tan/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-camel-tan/50">
+                                    </div>
+                                    <div>
+                                        <label for="register-lastname" class="block text-sm font-medium text-camel-black mb-1">Apellidos</label>
+                                        <input type="text" id="register-lastname" name="lastname" required class="w-full px-4 py-2.5 bg-camel-cream border border-camel-tan/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-camel-tan/50">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="register-email" class="block text-sm font-medium text-camel-black mb-1">Correo Electrónico</label>
+                                    <input type="email" id="register-email" name="email" required class="w-full px-4 py-2.5 bg-camel-cream border border-camel-tan/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-camel-tan/50">
+                                </div>
+                                
+                                <div>
+                                    <label for="register-password" class="block text-sm font-medium text-camel-black mb-1">Contraseña</label>
+                                    <input type="password" id="register-password" name="password" required class="w-full px-4 py-2.5 bg-camel-cream border border-camel-tan/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-camel-tan/50">
+                                    <p class="mt-1 text-xs text-camel-black/70">Mínimo 8 caracteres, incluyendo una letra mayúscula y un número</p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-camel-black mb-1">Tipo de cuenta</label>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="relative">
+                                            <input type="radio" id="type-freelancer" name="account-type" value="freelancer" class="peer sr-only" checked>
+                                            <label for="type-freelancer" class="flex p-4 bg-camel-cream border border-camel-tan/30 rounded-lg cursor-pointer peer-checked:border-camel-tan peer-checked:bg-camel-lightBeige hover:bg-camel-lightBeige transition-colors">
+                                                <div class="w-full text-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                                    </svg>
+                                                    <span class="font-medium">Freelancer</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="relative">
+                                            <input type="radio" id="type-company" name="account-type" value="company" class="peer sr-only">
+                                            <label for="type-company" class="flex p-4 bg-camel-cream border border-camel-tan/30 rounded-lg cursor-pointer peer-checked:border-camel-tan peer-checked:bg-camel-lightBeige hover:bg-camel-lightBeige transition-colors">
+                                                <div class="w-full text-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                                    </svg>
+                                                    <span class="font-medium">Empresa</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Conditional fields based on account type -->
+                                <div id="freelancer-fields">
+                                    <label for="register-username" class="block text-sm font-medium text-camel-black mb-1">Nombre de usuario</label>
+                                    <input type="text" id="register-username" name="username" class="w-full px-4 py-2.5 bg-camel-cream border border-camel-tan/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-camel-tan/50">
+                                </div>
+                                
+                                <div id="company-fields" class="hidden">
+                                    <label for="register-company" class="block text-sm font-medium text-camel-black mb-1">Nombre de la empresa</label>
+                                    <input type="text" id="register-company" name="company" class="w-full px-4 py-2.5 bg-camel-cream border border-camel-tan/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-camel-tan/50">
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="terms" name="terms" required class="h-4 w-4 text-camel-tan border-camel-tan/30 rounded focus:ring-camel-tan/50">
+                                    <label for="terms" class="ml-2 block text-sm text-camel-black">
+                                        Acepto los <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">Términos y Condiciones</a> y la <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">Política de Privacidad</a>
+                                    </label>
+                                </div>
+                                
+                                <button type="submit" class="w-full bg-camel-black text-camel-white py-2.5 px-4 rounded-lg hover:bg-camel-black/90 transition-colors relative overflow-hidden group">
+                                    <span class="relative z-10">Crear Cuenta</span>
+                                    <span class="absolute inset-0 w-0 bg-camel-tan/20 transition-all duration-300 group-hover:w-full"></span>
+                                </button>
+                            </form>
+                            
+                            <p class="mt-6 text-center text-sm text-camel-black/70">
+                                ¿Ya tienes una cuenta?
+                                <button id="switch-to-login" class="text-camel-tan hover:text-camel-black transition-colors font-medium">Inicia sesión</button>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="hidden md:block relative h-[600px] animate-float">
+                        <!-- Register illustration -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-camel-lightBeige to-camel-cream rounded-xl shadow-xl overflow-hidden border border-camel-tan/20 flex items-center justify-center">
+                            <div class="relative w-4/5 h-4/5">
+                                <!-- Stylized register illustration -->
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <!-- Document with checkmark -->
+                                    <div class="relative w-64 h-80 bg-camel-white rounded-lg shadow-xl border border-camel-tan/20 flex flex-col items-center justify-center p-6">
+                                        <!-- Document lines -->
+                                        <div class="w-full h-3 bg-camel-tan/20 rounded mb-3"></div>
+                                        <div class="w-3/4 h-3 bg-camel-tan/20 rounded mb-3"></div>
+                                        <div class="w-full h-3 bg-camel-tan/20 rounded mb-3"></div>
+                                        <div class="w-2/3 h-3 bg-camel-tan/20 rounded mb-3"></div>
+                                        
+                                        <!-- Checkmark circle -->
+                                        <div class="w-20 h-20 bg-camel-tan rounded-full flex items-center justify-center mt-4">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        
+                                        <div class="mt-6 text-center">
+                                            <div class="font-bold text-camel-black">Únete a Camello</div>
+                                            <div class="text-sm text-camel-black/70 mt-1">Conecta con oportunidades</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Connection lines -->
+                                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                                    <path class="circuit-line" d="M50,200 L150,200" stroke="#D2B48C" stroke-width="1" stroke-dasharray="5,5"/>
+                                    <path class="circuit-line" d="M250,200 L350,200" stroke="#D2B48C" stroke-width="1" stroke-dasharray="5,5"/>
+                                    <path class="circuit-line" d="M200,50 L200,150" stroke="#D2B48C" stroke-width="1" stroke-dasharray="5,5"/>
+                                    <path class="circuit-line" d="M200,250 L200,350" stroke="#D2B48C" stroke-width="1" stroke-dasharray="5,5"/>
+                                </svg>
+                                
+                                <!-- Floating elements -->
+                                <div class="absolute top-10 right-10 w-16 h-16 bg-camel-tan/20 rounded-lg rotate-12 animate-float" style="animation-delay: 0.5s;"></div>
+                                <div class="absolute bottom-10 left-10 w-16 h-16 bg-camel-tan/20 rounded-full animate-float" style="animation-delay: 1s;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Decorative elements -->
+                        <div class="absolute -right-6 top-1/4 w-12 h-12 bg-camel-tan rounded-lg rotate-12 animate-float" style="animation-delay: 1s;"></div>
+                        <div class="absolute -left-6 bottom-1/4 w-12 h-12 bg-camel-goldenBeige rounded-full animate-float" style="animation-delay: 1.5s;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-camel-black text-camel-cream py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center gap-3 mb-4 md:mb-0">
+                    <!-- Logo -->
+                    <div class="relative w-8 h-8 bg-gradient-to-br from-camel-tan to-camel-goldenBeige rounded-lg flex items-center justify-center text-camel-white font-bold shadow-lg overflow-hidden">
+                        <div class="absolute inset-0 bg-circuit-pattern opacity-20"></div>
+                        <span class="relative z-10">C</span>
+                    </div>
+                    <span class="text-xl font-bold gradient-text">Camello</span>
+                </div>
+                
+                <div class="flex gap-6">
+                    <a href="#" class="text-camel-cream/60 hover:text-camel-tan text-sm transition-colors">Términos y Condiciones</a>
+                    <a href="#" class="text-camel-cream/60 hover:text-camel-tan text-sm transition-colors">Política de Privacidad</a>
+                    <a href="#" class="text-camel-cream/60 hover:text-camel-tan text-sm transition-colors">Contacto</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-camel-tan/20 mt-6 pt-6 text-center">
+                <p class="text-camel-cream/60 text-sm">
+                    &copy; <span id="current-year"></span> Camello. Todos los derechos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Login/Register tabs
+        const tabLogin = document.getElementById('tab-login');
+        const tabRegister = document.getElementById('tab-register');
+        const contentLogin = document.getElementById('content-login');
+        const contentRegister = document.getElementById('content-register');
+        const switchToRegister = document.getElementById('switch-to-register');
+        const switchToLogin = document.getElementById('switch-to-login');
+        
+        function showLogin() {
+            tabLogin.classList.add('bg-camel-tan', 'text-camel-white');
+            tabLogin.classList.remove('text-camel-black');
+            tabRegister.classList.remove('bg-camel-tan', 'text-camel-white');
+            tabRegister.classList.add('text-camel-black');
+            contentLogin.classList.remove('hidden');
+            contentRegister.classList.add('hidden');
+        }
+        
+        function showRegister() {
+            tabRegister.classList.add('bg-camel-tan', 'text-camel-white');
+            tabRegister.classList.remove('text-camel-black');
+            tabLogin.classList.remove('bg-camel-tan', 'text-camel-white');
+            tabLogin.classList.add('text-camel-black');
+            contentRegister.classList.remove('hidden');
+            contentLogin.classList.add('hidden');
+        }
+        
+        tabLogin.addEventListener('click', showLogin);
+        tabRegister.addEventListener('click', showRegister);
+        switchToRegister.addEventListener('click', showRegister);
+        switchToLogin.addEventListener('click', showLogin);
+        
+        // Account type toggle
+        const typeFreelancer = document.getElementById('type-freelancer');
+        const typeCompany = document.getElementById('type-company');
+        const freelancerFields = document.getElementById('freelancer-fields');
+        const companyFields = document.getElementById('company-fields');
+        
+        typeFreelancer.addEventListener('change', () => {
+            if (typeFreelancer.checked) {
+                freelancerFields.classList.remove('hidden');
+                companyFields.classList.add('hidden');
+            }
+        });
+        
+        typeCompany.addEventListener('change', () => {
+            if (typeCompany.checked) {
+                companyFields.classList.remove('hidden');
+                freelancerFields.classList.add('hidden');
+            }
+        });
+        
+        // Form submission (for demo purposes)
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Inicio de sesión simulado. En una aplicación real, esto enviaría los datos al servidor.');
+        });
+        
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Registro simulado. En una aplicación real, esto enviaría los datos al servidor.');
+        });
+    </script>
+</body>
+</html>
