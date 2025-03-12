@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camello - La Plataforma Freelance de Colombia</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        camel: {
+                            tan: '#D2B48C',
+                            lightBeige: '#F6ECD4',
+                            goldenBeige: '#DBC29D',
+                            cream: '#FFF9E8',
+                            white: '#FFFFFF',
+                            black: '#000000'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 0.8s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'slide-right': 'slideRight 0.8s ease-out forwards',
+                        'scale-in': 'scaleIn 0.8s ease-out forwards',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideRight: {
+                            '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        scaleIn: {
+                            '0%': { transform: 'scale(0.9)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        }
+                    },
+                    backgroundImage: {
+                        'circuit-pattern': "url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23DBC29D' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+                        'dots-pattern': "url(\"data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D2B48C' fill-opacity='0.1' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E\")",
+                        'tech-pattern': "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23DBC29D' fill-opacity='0.1'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        /* Custom animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideRight {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-right {
+            animation: slideRight 0.8s ease-out forwards;
+        }
+        
+        .animate-scale-in {
+            animation: scaleIn 0.8s ease-out forwards;
+        }
+        
+        /* Staggered animation delay */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #FFF9E8;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #D2B48C;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #DBC29D;
+        }
+        
+        /* Code block styling */
+        .code-block {
+            font-family: 'Courier New', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .code-block::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 70%, #FFF9E8);
+            z-index: 1;
+        }
+        
+        .typing-animation {
+            display: inline-block;
+            width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end) forwards;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        /* Circuit board animation */
+        .circuit-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 3s linear forwards;
+        }
+        
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #D2B48C, #DBC29D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-camel-cream text-camel-black font-sans">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 glass border-b border-camel-tan/20">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <!-- Logo -->
+                <div class="relative w-10 h-10 bg-gradient-to-br from-camel-tan to-camel-goldenBeige rounded-lg flex items-center justify-center text-camel-white font-bold shadow-lg overflow-hidden">
+                    <div class="absolute inset-0 bg-circuit-pattern opacity-20"></div>
+                    <span class="relative z-10">C</span>
+                    <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-camel-cream rounded-full animate-pulse-slow"></div>
+                </div>
+                <span class="text-2xl font-bold gradient-text">Camello</span>
+            </div>
+            
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#features" class="text-camel-black hover:text-camel-tan transition-colors relative group">
+                    Características
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-camel-tan transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#about" class="text-camel-black hover:text-camel-tan transition-colors relative group">
+                    Nosotros
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-camel-tan transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#mission" class="text-camel-black hover:text-camel-tan transition-colors relative group">
+                    Misión y Visión
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-camel-tan transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#contact" class="text-camel-black hover:text-camel-tan transition-colors relative group">
+                    Contacto
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-camel-tan transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </nav>
+            
+            <div class="flex items-center gap-4">
+                <a href="#login" class="relative overflow-hidden group bg-camel-black text-camel-white px-5 py-2.5 rounded-lg transition-all duration-300 hover:bg-camel-black/90 shadow-md">
+                    <span class="relative z-10">Iniciar Sesión</span>
+                    <span class="absolute inset-0 w-0 bg-camel-tan/20 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <button id="mobile-menu-button" class="md:hidden text-camel-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-b border-camel-tan/20">
+            <div class="container mx-auto px-4 py-4 space-y-4">
+                <a href="#features" class="block text-camel-black hover:text-camel-tan transition-colors">Características</a>
+                <a href="#about" class="block text-camel-black hover:text-camel-tan transition-colors">Nosotros</a>
+                <a href="#mission" class="block text-camel-black hover:text-camel-tan transition-colors">Misión y Visión</a>
+                <a href="#contact" class="block text-camel-black hover:text-camel-tan transition-colors">Contacto</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 overflow-hidden">
+        <div class="absolute inset-0 bg-tech-pattern"></div>
+        <div class="absolute top-20 right-20 w-64 h-64 bg-camel-tan rounded-full opacity-10 blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-10 left-10 w-80 h-80 bg-camel-goldenBeige rounded-full opacity-10 blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
+        
+        <div class="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="space-y-8 animate-slide-up">
+                <div class="inline-block px-3 py-1 bg-camel-lightBeige text-camel-black rounded-full text-sm font-medium shadow-sm border border-camel-tan/20">
+                    La Plataforma Freelance de Colombia
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                    Conectamos <span class="gradient-text">talento</span> con <span class="gradient-text">oportunidades</span>
+                </h1>
+                <p class="text-lg text-camel-black/80">
+                    La plataforma freelance que revoluciona el trabajo independiente en Colombia, 
+                    ofreciendo herramientas innovadoras para mejorar la experiencia de trabajo remoto.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#register" class="relative overflow-hidden group bg-camel-black text-camel-white px-6 py-3 rounded-lg transition-all duration-300 hover:shadow-lg shadow-md">
+                        <span class="relative z-10 flex items-center">
+                            Comenzar ahora
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                        <span class="absolute inset-0 w-0 bg-camel-tan/20 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#learn-more" class="relative overflow-hidden group border-2 border-camel-black text-camel-black px-6 py-3 rounded-lg transition-all duration-300 hover:shadow-lg">
+                        <span class="relative z-10">Conocer más</span>
+                        <span class="absolute inset-0 w-0 bg-camel-tan/20 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+                
+                <!-- Tech stats -->
+                <div class="pt-6 grid grid-cols-3 gap-4">
+                    <div class="bg-camel-white rounded-lg p-3 shadow-md border border-camel-tan/20 animate-slide-up stagger-1">
+                        <div class="text-2xl font-bold gradient-text">1000+</div>
+                        <div class="text-sm text-camel-black/70">Freelancers</div>
+                    </div>
+                    <div class="bg-camel-white rounded-lg p-3 shadow-md border border-camel-tan/20 animate-slide-up stagger-2">
+                        <div class="text-2xl font-bold gradient-text">500+</div>
+                        <div class="text-sm text-camel-black/70">Proyectos</div>
+                    </div>
+                    <div class="bg-camel-white rounded-lg p-3 shadow-md border border-camel-tan/20 animate-slide-up stagger-3">
+                        <div class="text-2xl font-bold gradient-text">4.8/5</div>
+                        <div class="text-sm text-camel-black/70">Calificación</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative h-[500px] animate-float">
+                <!-- Tech dashboard mockup -->
+                <div class="absolute inset-0 bg-camel-white rounded-xl shadow-2xl overflow-hidden border border-camel-tan/20">
+                    <!-- Dashboard header -->
+                    <div class="h-12 bg-camel-black flex items-center px-4 gap-2">
+                        <div class="flex gap-1.5">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="text-xs text-camel-white/70 ml-4">camello.co/dashboard</div>
+                    </div>
+                    
+                    <!-- Dashboard content -->
+                    <div class="p-6 h-[calc(100%-3rem)] overflow-hidden">
+                        <!-- Dashboard sidebar -->
+                        <div class="flex h-full gap-6">
+                            <div class="w-1/4 bg-camel-cream rounded-lg p-4 flex flex-col gap-3">
+                                <div class="flex items-center gap-2 mb-4">
+                                    <div class="w-8 h-8 rounded-full bg-camel-tan"></div>
+                                    <div class="text-sm font-medium">Usuario</div>
+                                </div>
+                                
+                                <div class="bg-camel-tan/20 rounded-md p-2 text-sm">Dashboard</div>
+                                <div class="rounded-md p-2 text-sm text-camel-black/70">Proyectos</div>
+                                <div class="rounded-md p-2 text-sm text-camel-black/70">Mensajes</div>
+                                <div class="rounded-md p-2 text-sm text-camel-black/70">Pagos</div>
+                                <div class="rounded-md p-2 text-sm text-camel-black/70">Perfil</div>
+                                
+                                <div class="mt-auto">
+                                    <div class="bg-camel-lightBeige rounded-lg p-3 text-xs">
+                                        <div class="font-medium mb-1">Plan Actual</div>
+                                        <div class="text-camel-black/70">Profesional</div>
+                                        <div class="w-full h-1.5 bg-camel-white rounded-full mt-2">
+                                            <div class="w-3/4 h-full bg-camel-tan rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Dashboard main content -->
+                            <div class="w-3/4 flex flex-col gap-4">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold">Resumen</h3>
+                                    <div class="text-xs text-camel-black/70">Última actualización: Hoy</div>
+                                </div>
+                                
+                                <!-- Stats cards -->
+                                <div class="grid grid-cols-3 gap-3">
+                                    <div class="bg-camel-lightBeige rounded-lg p-3">
+                                        <div class="text-xs text-camel-black/70">Proyectos Activos</div>
+                                        <div class="text-xl font-bold">3</div>
+                                        <div class="text-xs text-green-600">+1 esta semana</div>
+                                    </div>
+                                    <div class="bg-camel-lightBeige rounded-lg p-3">
+                                        <div class="text-xs text-camel-black/70">Propuestas Enviadas</div>
+                                        <div class="text-xl font-bold">12</div>
+                                        <div class="text-xs text-green-600">+4 esta semana</div>
+                                    </div>
+                                    <div class="bg-camel-lightBeige rounded-lg p-3">
+                                        <div class="text-xs text-camel-black/70">Ingresos</div>
+                                        <div class="text-xl font-bold">$1,250</div>
+                                        <div class="text-xs text-green-600">+$350 este mes</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Activity chart -->
+                                <div class="bg-camel-cream rounded-lg p-4 flex-grow">
+                                    <div class="flex justify-between items-center mb-4">
+                                        <h4 class="text-sm font-medium">Actividad Reciente</h4>
+                                        <div class="flex gap-2">
+                                            <div class="text-xs px-2 py-1 bg-camel-tan/20 rounded-md">Día</div>
+                                            <div class="text-xs px-2 py-1 bg-camel-tan/20 rounded-md">Semana</div>
+                                            <div class="text-xs px-2 py-1 bg-camel-tan rounded-md text-camel-white">Mes</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Chart mockup -->
+                                    <div class="h-32 flex items-end gap-1">
+                                        <div class="h-20% w-full bg-camel-tan/20 rounded-sm"></div>
+                                        <div class="h-40% w-full bg-camel-tan/20 rounded-sm"></div>
+                                        <div class="h-30% w-full bg-camel-tan/20 rounded-sm"></div>
+                                        <div class="h-60% w-full bg-camel-tan/20 rounded-sm"></div>
+                                        <div class="h-50% w-full bg-camel-tan/20 rounded-sm"></div>
+                                        <div class="h-70% w-full bg-camel-tan/20 rounded-sm"></div>
+                                        <div class="h-90% w-full bg-camel-tan rounded-sm"></div>
+                                        <div class="h-80% w-full bg-camel-tan/20 rounded-sm"></div>
+                                        <div class="h-60% w-full bg-camel-tan/20 rounded-sm"></div>
+                                        <div class="h-40% w-full bg-camel-tan/20 rounded-sm"></div>
+                                        <div class="h-50% w-full bg-camel-tan/20 rounded-sm"></div>
+                                        <div class="h-30% w-full bg-camel-tan/20 rounded-sm"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Recent projects -->
+                                <div class="bg-camel-cream rounded-lg p-4">
+                                    <h4 class="text-sm font-medium mb-3">Proyectos Recientes</h4>
+                                    <div class="space-y-2">
+                                        <div class="flex justify-between items-center p-2 bg-camel-white rounded-md">
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                                <div class="text-sm">Diseño de UI para App</div>
+                                            </div>
+                                            <div class="text-xs text-camel-black/70">En progreso</div>
+                                        </div>
+                                        <div class="flex justify-between items-center p-2 bg-camel-white rounded-md">
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
+                                                <div class="text-sm">Desarrollo Frontend</div>
+                                            </div>
+                                            <div class="text-xs text-camel-black/70">Revisión</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Decorative elements -->
+                <div class="absolute -right-6 top-1/4 w-12 h-12 bg-camel-tan rounded-lg rotate-12 animate-float" style="animation-delay: 1s;"></div>
+                <div class="absolute -left-6 bottom-1/4 w-12 h-12 bg-camel-goldenBeige rounded-full animate-float" style="animation-delay: 1.5s;"></div>
+                
+                <!-- Circuit lines -->
+                <svg class="absolute -right-20 -bottom-20 w-64 h-64 opacity-20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path class="circuit-line" d="M10,50 L30,50 L30,30 L50,30 L50,10" fill="none" stroke="#D2B48C" stroke-width="1"/>
+                    <path class="circuit-line" d="M10,60 L40,60 L40,40 L60,40 L60,20 L80,20 L80,40 L90,40" fill="none" stroke="#D2B48C" stroke-width="1" style="animation-delay: 0.5s"/>
+                    <path class="circuit-line" d="M10,70 L20,70 L20,90 L40,90 L40,70 L60,70 L60,50 L80,50 L80,70 L90,70" fill="none" stroke="#D2B48C" stroke-width="1" style="animation-delay: 1s"/>
+                    <circle cx="30" cy="30" r="2" fill="#D2B48C" class="animate-pulse-slow"/>
+                    <circle cx="60" cy="40" r="2" fill="#D2B48C" class="animate-pulse-slow" style="animation-delay: 0.7s"/>
+                    <circle cx="40" cy="90" r="2" fill="#D2B48C" class="animate-pulse-slow" style="animation-delay: 1.3s"/>
+                    <circle cx="80" cy="50" r="2" fill="#D2B48C" class="animate-pulse-slow" style="animation-delay: 2s"/>
+                </svg>
+            </div>
+        </div>
+        
+        <!-- Code snippet -->
+        <div class="container mx-auto mt-16">
+            <div class="max-w-4xl mx-auto bg-camel-black rounded-xl p-4 shadow-xl overflow-hidden code-block">
+                <pre class="text-camel-cream text-sm overflow-x-auto">
+<span class="text-camel-tan">// Conectando talento con oportunidades</span>
+<span class="text-camel-lightBeige">import</span> { Freelancer, Client, Project } <span class="text-camel-lightBeige">from</span> <span class="text-camel-goldenBeige">'@camello/core'</span>;
+
+<span class="text-camel-lightBeige">const</span> <span class="text-camel-goldenBeige">matchTalentWithOpportunity</span> = <span class="text-camel-lightBeige">async</span> (freelancer: Freelancer, client: Client) => {
+  <span class="text-camel-lightBeige">const</span> projects = <span class="text-camel-lightBeige">await</span> Project.findMatching({
+    skills: freelancer.skills,
+    availability: freelancer.availability,
+    requirements: client.projectRequirements
+  });
+  
+  <span class="text-camel-lightBeige">return</span> {
+    matches: projects.filter(p => p.compatibilityScore > 0.8),
+    topMatch: projects.sort((a, b) => b.compatibilityScore - a.compatibilityScore)[0]
+  };
+};
+
+<span class="typing-animation">// Camello - Revolucionando el trabajo freelance en Colombia</span>
+</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- What is Camello Section -->
+    <section class="py-20 bg-camel-white" id="about">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
+                <div class="inline-block px-3 py-1 bg-camel-lightBeige text-camel-black rounded-full text-sm font-medium shadow-sm border border-camel-tan/20 mb-4">
+                    Sobre Nosotros
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-camel-black mb-6">¿Qué es Camello?</h2>
+                <p class="text-lg text-camel-black/80">
+                    Camello es una plataforma digital que conecta a freelancers con clientes en Colombia. 
+                    Su objetivo es facilitar la contratación de profesionales independientes en diversas áreas, 
+                    ofreciendo herramientas innovadoras para mejorar la experiencia de trabajo remoto.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="group bg-camel-cream p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 animate-slide-up stagger-1 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-camel-tan/5 to-camel-tan/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="w-12 h-12 bg-camel-lightBeige rounded-lg flex items-center justify-center text-camel-black mb-4 group-hover:bg-camel-tan group-hover:text-camel-white transition-all duration-300 relative z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-camel-black mb-2 relative z-10">Conectamos Talento</h3>
+                    <p class="text-camel-black/80 relative z-10">
+                        Unimos a profesionales independientes con empresas y clientes que necesitan sus servicios.
+                    </p>
+                </div>
+                
+                <div class="group bg-camel-cream p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 animate-slide-up stagger-2 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-camel-tan/5 to-camel-tan/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="w-12 h-12 bg-camel-lightBeige rounded-lg flex items-center justify-center text-camel-black mb-4 group-hover:bg-camel-tan group-hover:text-camel-white transition-all duration-300 relative z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-camel-black mb-2 relative z-10">Sistema de Mentoría</h3>
+                    <p class="text-camel-black/80 relative z-10">
+                        Conectamos a nuevos freelancers con mentores experimentados que ganan reputación y comisiones.
+                    </p>
+                </div>
+                
+                <div class="group bg-camel-cream p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 animate-slide-up stagger-3 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-camel-tan/5 to-camel-tan/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="w-12 h-12 bg-camel-lightBeige rounded-lg flex items-center justify-center text-camel-black mb-4 group-hover:bg-camel-tan group-hover:text-camel-white transition-all duration-300 relative z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-camel-black mb-2 relative z-10">Gamificación</h3>
+                    <p class="text-camel-black/80 relative z-10">
+                        Niveles y logros para recompensar a los freelancers y desbloquear beneficios exclusivos.
+                    </p>
+                </div>
+                
+                <div class="group bg-camel-cream p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 animate-slide-up stagger-4 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-camel-tan/5 to-camel-tan/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="w-12 h-12 bg-camel-lightBeige rounded-lg flex items-center justify-center text-camel-black mb-4 group-hover:bg-camel-tan group-hover:text-camel-white transition-all duration-300 relative z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-camel-black mb-2 relative z-10">Asesoría Legal y Fiscal</h3>
+                    <p class="text-camel-black/80 relative z-10">
+                        Herramientas para calcular impuestos, generar facturas y consultorías legales en línea.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Tech progress bars -->
+            <div class="mt-20 max-w-4xl mx-auto">
+                <div class="text-center mb-10">
+                    <h3 class="text-2xl font-bold text-camel-black mb-2">Tecnología de Vanguardia</h3>
+                    <p class="text-camel-black/80">Utilizamos las últimas tecnologías para ofrecer la mejor experiencia</p>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="animate-slide-right stagger-1">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm font-medium text-camel-black">Inteligencia Artificial</span>
+                            <span class="text-sm font-medium text-camel-black">92%</span>
+                        </div>
+                        <div class="w-full h-2 bg-camel-lightBeige rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-camel-tan to-camel-goldenBeige rounded-full" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-slide-right stagger-2">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm font-medium text-camel-black">Seguridad de Datos</span>
+                            <span class="text-sm font-medium text-camel-black">95%</span>
+                        </div>
+                        <div class="w-full h-2 bg-camel-lightBeige rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-camel-tan to-camel-goldenBeige rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-slide-right stagger-3">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm font-medium text-camel-black">Experiencia de Usuario</span>
+                            <span class="text-sm font-medium text-camel-black">88%</span>
+                        </div>
+                        <div class="w-full h-2 bg-camel-lightBeige rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-camel-tan to-camel-goldenBeige rounded-full" style="width: 88%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-slide-right stagger-4">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm font-medium text-camel-black">Algoritmos de Matching</span>
+                            <span class="text-sm font-medium text-camel-black">90%</span>
+                        </div>
+                        <div class="w-full h-2 bg-camel-lightBeige rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-camel-tan to-camel-goldenBeige rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-camel-cream relative overflow-hidden" id="features">
+        <div class="absolute inset-0 bg-dots-pattern"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-camel-tan rounded-full opacity-10 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-camel-goldenBeige rounded-full opacity-10 blur-3xl"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <div class="inline-block px-3 py-1 bg-camel-lightBeige text-camel-black rounded-full text-sm font-medium shadow-sm border border-camel-tan/20 mb-4">
+                    Características
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-camel-black mb-6">Características Principales</h2>
+                <p class="text-lg text-camel-black/80">
+                    Camello ofrece una serie de herramientas y funcionalidades diseñadas para potenciar 
+                    el trabajo freelance en Colombia.
+                </p>
+            </div>
+            
+            <!-- Features tabs -->
+            <div class="max-w-5xl mx-auto">
+                <div class="flex justify-center mb-10">
+                    <div class="inline-flex p-1 bg-camel-lightBeige rounded-lg">
+                        <button id="tab-freelancers" class="px-6 py-2 rounded-md bg-camel-tan text-camel-white font-medium">Para Freelancers</button>
+                        <button id="tab-clients" class="px-6 py-2 rounded-md text-camel-black font-medium">Para Clientes</button>
+                    </div>
+                </div>
+                
+                <!-- Freelancers tab content -->
+                <div id="content-freelancers" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-camel-tan/10 rounded-bl-3xl -mr-8 -mt-8 group-hover:bg-camel-tan/20 transition-all duration-300"></div>
+                        <div class="w-12 h-12 bg-camel-lightBeige rounded-lg flex items-center justify-center text-camel-black mb-4 group-hover:bg-camel-tan group-hover:text-camel-white transition-all duration-300 relative z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-camel-black mb-2 relative z-10">Proyectos Grupales</h3>
+                        <p class="text-camel-black/80 relative z-10">Herramientas para trabajo en equipo con tableros Kanban y chats integrados.</p>
+                        <div class="mt-4 pt-4 border-t border-camel-tan/10 relative z-10">
+                            <a href="#" class="text-sm text-camel-tan hover:text-camel-black transition-colors flex items-center">
+                                Conocer más
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature 2 -->
+                    <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-camel-tan/10 rounded-bl-3xl -mr-8 -mt-8 group-hover:bg-camel-tan/20 transition-all duration-300"></div>
+                        <div class="w-12 h-12 bg-camel-lightBeige rounded-lg flex items-center justify-center text-camel-black mb-4 group-hover:bg-camel-tan group-hover:text-camel-white transition-all duration-300 relative z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-camel-black mb-2 relative z-10">Categorización Ética</h3>
+                        <p class="text-camel-black/80 relative z-10">Historial de pagos y comunicación para evitar clientes con malas prácticas.</p>
+                        <div class="mt-4 pt-4 border-t border-camel-tan/10 relative z-10">
+                            <a href="#" class="text-sm text-camel-tan hover:text-camel-black transition-colors flex items-center">
+                                Conocer más
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0   d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature 3 -->
+                    <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-camel-tan/10 rounded-bl-3xl -mr-8 -mt-8 group-hover:bg-camel-tan/20 transition-all duration-300"></div>
+                        <div class="w-12 h-12 bg-camel-lightBeige rounded-lg flex items-center justify-center text-camel-black mb-4 group-hover:bg-camel-tan group-hover:text-camel-white transition-all duration-300 relative z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-camel-black mb-2 relative z-10">Red de Networking</h3>
+                        <p class="text-camel-black/80 relative z-10">Eventos virtuales y presenciales, talleres y oportunidades de conexión.</p>
+                        <div class="mt-4 pt-4 border-t border-camel-tan/10 relative z-10">
+                            <a href="#" class="text-sm text-camel-tan hover:text-camel-black transition-colors flex items-center">
+                                Conocer más
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature 4 -->
+                    <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-camel-tan/10 rounded-bl-3xl -mr-8 -mt-8 group-hover:bg-camel-tan/20 transition-all duration-300"></div>
+                        <div class="w-12 h-12 bg-camel-lightBeige rounded-lg flex items-center justify-center text-camel-black mb-4 group-hover:bg-camel-tan group-hover:text-camel-white transition-all duration-300 relative z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-camel-black mb-2 relative z-10">Tienda de Recursos</h3>
+                        <p class="text-camel-black/80 relative z-10">Venta de plantillas, presets, cursos y guías creados por freelancers.</p>
+                        <div class="mt-4 pt-4 border-t border-camel-tan/10 relative z-10">
+                            <a href="#" class="text-sm text-camel-tan hover:text-camel-black transition-colors flex items-center">
+                                Conocer más
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature 5 -->
+                    <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-camel-tan/10 rounded-bl-3xl -mr-8 -mt-8 group-hover:bg-camel-tan/20 transition-all duration-300"></div>
+                        <div class="w-12 h-12 bg-camel-lightBeige rounded-lg flex items-center justify-center text-camel-black mb-4 group-hover:bg-camel-tan group-hover:text-camel-white transition-all duration-300 relative z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-camel-black mb-2 relative z-10">Pruebas de Habilidades</h3>
+                        <p class="text-camel-black/80 relative z-10">Evaluaciones interactivas certificadas para validar habilidades técnicas.</p>
+                        <div class="mt-4 pt-4 border-t border-camel-tan/10 relative z-10">
+                            <a href="#" class="text-sm text-camel-tan hover:text-camel-black transition-colors flex items-center">
+                                Conocer más
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature 6 -->
+                    <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-camel-tan/10 rounded-bl-3xl -mr-8 -mt-8 group-hover:bg-camel-tan/20 transition-all duration-300"></div>
+                        <div class="w-12 h-12 bg-camel-lightBeige rounded-lg flex items-center justify-center text-camel-black mb-4 group-hover:bg-camel-tan group-hover:text-camel-white transition-all duration-300 relative z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-camel-black mb-2 relative z-10">Planes Premium</h3>
+                        <p class="text-camel-black/80 relative z-10">Mayor visibilidad y acceso a clientes premium con planes de suscripción.</p>
+                        <div class="mt-4 pt-4 border-t border-camel-tan/10 relative z-10">
+                            <a href="#" class="text-sm text-camel-tan hover:text-camel-black transition-colors flex items-center">
+                                Conocer más
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Clients tab content (hidden by default) -->
+                <div id="content-clients" class="hidden grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Client Feature 1 -->
+                    <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-camel-tan/10 rounded-bl-3xl -mr-8 -mt-8 group-hover:bg-camel-tan/20 transition-all duration-300"></div>
+                        <div class="w-12 h-12 bg-camel-lightBeige rounded-lg flex items-center justify-center text-camel-black mb-4 group-hover:bg-camel-tan group-hover:text-camel-white transition-all duration-300 relative z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-camel-black mb-2 relative z-10">Búsqueda Avanzada</h3>
+                        <p class="text-camel-black/80 relative z-10">Filtros precisos para encontrar el talento ideal según habilidades, experiencia y disponibilidad.</p>
+                        <div class="mt-4 pt-4 border-t border-camel-tan/10 relative z-10">
+                            <a href="#" class="text-sm text-camel-tan hover:text-camel-black transition-colors flex items-center">
+                                Conocer más
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Client Feature 2 -->
+                    <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-camel-tan/10 rounded-bl-3xl -mr-8 -mt-8 group-hover:bg-camel-tan/20 transition-all duration-300"></div>
+                        <div class="w-12 h-12 bg-camel-lightBeige rounded-lg flex items-center justify-center text-camel-black mb-4 group-hover:bg-camel-tan group-hover:text-camel-white transition-all duration-300 relative z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-camel-black mb-2 relative z-10">Contratos Inteligentes</h3>
+                        <p class="text-camel-black/80 relative z-10">Plantillas personalizables con protección legal y términos claros para ambas partes.</p>
+                        <div class="mt-4 pt-4 border-t border-camel-tan/10 relative z-10">
+                            <a href="#" class="text-sm text-camel-tan hover:text-camel-black transition-colors flex items-center">
+                                Conocer más
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Client Feature 3 -->
+                    <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-camel-tan/10 rounded-bl-3xl -mr-8 -mt-8 group-hover:bg-camel-tan/20 transition-all duration-300"></div>
+                        <div class="w-12 h-12 bg-camel-lightBeige rounded-lg flex items-center justify-center text-camel-black mb-4 group-hover:bg-camel-tan group-hover:text-camel-white transition-all duration-300 relative z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-camel-black mb-2 relative z-10">Seguimiento en Tiempo Real</h3>
+                        <p class="text-camel-black/80 relative z-10">Monitoreo del progreso de proyectos con hitos, entregas y comunicación centralizada.</p>
+                        <div class="mt-4 pt-4 border-t border-camel-tan/10 relative z-10">
+                            <a href="#" class="text-sm text-camel-tan hover:text-camel-black transition-colors flex items-center">
+                                Conocer más
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Client Feature 4 -->
+                    <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-camel-tan/10 rounded-bl-3xl -mr-8 -mt-8 group-hover:bg-camel-tan/20 transition-all duration-300"></div>
+                        <div class="w-12 h-12 bg-camel-lightBeige rounded-lg flex items-center justify-center text-camel-black mb-4 group-hover:bg-camel-tan group-hover:text-camel-white transition-all duration-300 relative z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-camel-black mb-2 relative z-10">Pagos Seguros</h3>
+                        <p class="text-camel-black/80 relative z-10">Sistema de depósito en garantía que protege a ambas partes durante todo el proyecto.</p>
+                        <div class="mt-4 pt-4 border-t border-camel-tan/10 relative z-10">
+                            <a href="#" class="text-sm text-camel-tan hover:text-camel-black transition-colors flex items-center">
+                                Conocer más
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Client Feature 5 -->
+                    <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-camel-tan/10 rounded-bl-3xl -mr-8 -mt-8 group-hover:bg-camel-tan/20 transition-all duration-300"></div>
+                        <div class="w-12 h-12 bg-camel-lightBeige rounded-lg flex items-center justify-center text-camel-black mb-4 group-hover:bg-camel-tan group-hover:text-camel-white transition-all duration-300 relative z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-camel-black mb-2 relative z-10">Análisis de Rendimiento</h3>
+                        <p class="text-camel-black/80 relative z-10">Estadísticas detalladas sobre proyectos, presupuestos y rendimiento de freelancers.</p>
+                        <div class="mt-4 pt-4 border-t border-camel-tan/10 relative z-10">
+                            <a href="#" class="text-sm text-camel-tan hover:text-camel-black transition-colors flex items-center">
+                                Conocer más
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Client Feature 6 -->
+                    <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-camel-tan/10 rounded-bl-3xl -mr-8 -mt-8 group-hover:bg-camel-tan/20 transition-all duration-300"></div>
+                        <div class="w-12 h-12 bg-camel-lightBeige rounded-lg flex items-center justify-center text-camel-black mb-4 group-hover:bg-camel-tan group-hover:text-camel-white transition-all duration-300 relative z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-camel-black mb-2 relative z-10">Gestión de Equipos</h3>
+                        <p class="text-camel-black/80 relative z-10">Herramientas para administrar múltiples freelancers y proyectos desde un solo panel.</p>
+                        <div class="mt-4 pt-4 border-t border-camel-tan/10 relative z-10">
+                            <a href="#" class="text-sm text-camel-tan hover:text-camel-black transition-colors flex items-center">
+                                Conocer más
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Featured technology section -->
+            <div class="mt-20 bg-camel-white rounded-xl shadow-xl overflow-hidden">
+                <div class="grid md:grid-cols-2">
+                    <div class="p-8 md:p-12">
+                        <div class="inline-block px-3 py-1 bg-camel-lightBeige text-camel-black rounded-full text-sm font-medium shadow-sm border border-camel-tan/20 mb-4">
+                            Tecnología Destacada
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-camel-black mb-4">Algoritmo de Matching Inteligente</h3>
+                        <p class="text-camel-black/80 mb-6">
+                            Nuestro sistema de inteligencia artificial analiza más de 50 variables para conectar a los freelancers con los proyectos perfectos para sus habilidades, experiencia y preferencias.
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-tan mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-camel-black/80">Compatibilidad de habilidades técnicas y blandas</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-tan mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-camel-black/80">Análisis de historial de proyectos exitosos</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-tan mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-camel-black/80">Predicción de compatibilidad cliente-freelancer</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-tan mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-camel-black/80">Mejora continua mediante aprendizaje automático</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="inline-block bg-camel-black text-camel-white px-5 py-2.5 rounded-lg transition-all duration-300 hover:bg-camel-black/90 shadow-md">
+                            Explorar tecnología
+                        </a>
+                    </div>
+                    <div class="bg-camel-lightBeige h-full min-h-[400px] flex items-center justify-center p-8 relative overflow-hidden">
+                        <!-- Tech visualization -->
+                        <div class="relative z-10 bg-camel-white rounded-lg shadow-lg p-6 w-full max-w-sm">
+                            <div class="flex justify-between items-center mb-6">
+                                <h4 class="font-bold text-camel-black">Matching AI</h4>
+                                <div class="px-2 py-1 bg-camel-tan/20 rounded-md text-xs font-medium text-camel-black">v2.5</div>
+                            </div>
+                            
+                            <!-- AI Matching visualization -->
+                            <div class="relative h-48 mb-6 bg-camel-cream rounded-lg p-3 overflow-hidden">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="w-32 h-32 rounded-full border-4 border-camel-tan/30 flex items-center justify-center relative animate-spin-slow">
+                                        <div class="w-24 h-24 rounded-full border-4 border-camel-tan/50 flex items-center justify-center animate-spin-slow" style="animation-direction: reverse;">
+                                            <div class="w-16 h-16 rounded-full bg-camel-tan/20 flex items-center justify-center">
+                                                <div class="w-8 h-8 rounded-full bg-camel-tan"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Orbiting elements -->
+                                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-camel-tan rounded-full"></div>
+                                        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-4 h-4 bg-camel-tan rounded-full"></div>
+                                        <div class="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-camel-tan rounded-full"></div>
+                                        <div class="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-camel-tan rounded-full"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Connection lines -->
+                                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <path class="circuit-line" d="M20,100 L80,100" stroke="#D2B48C" stroke-width="1" stroke-dasharray="5,5"/>
+                                    <path class="circuit-line" d="M120,100 L180,100" stroke="#D2B48C" stroke-width="1" stroke-dasharray="5,5"/>
+                                    <path class="circuit-line" d="M100,20 L100,80" stroke="#D2B48C" stroke-width="1" stroke-dasharray="5,5"/>
+                                    <path class="circuit-line" d="M100,120 L100,180" stroke="#D2B48C" stroke-width="1" stroke-dasharray="5,5"/>
+                                </svg>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span class="text-camel-black/70">Precisión de Matching</span>
+                                        <span class="text-camel-black font-medium">94%</span>
+                                    </div>
+                                    <div class="h-1.5 bg-camel-lightBeige rounded-full overflow-hidden">
+                                        <div class="h-full bg-camel-tan rounded-full" style="width: 94%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span class="text-camel-black/70">Satisfacción de Usuarios</span>
+                                        <span class="text-camel-black font-medium">92%</span>
+                                    </div>
+                                    <div class="h-1.5 bg-camel-lightBeige rounded-full overflow-hidden">
+                                        <div class="h-full bg-camel-tan rounded-full" style="width: 92%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Background circuit pattern -->
+                        <div class="absolute inset-0 bg-circuit-pattern opacity-30"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission and Vision -->
+    <section class="py-20 bg-camel-white relative overflow-hidden" id="mission">
+        <div class="absolute inset-0 bg-tech-pattern opacity-30"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative h-[500px] animate-float">
+                    <!-- Vision visualization -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-camel-lightBeige to-camel-cream rounded-xl shadow-xl overflow-hidden border border-camel-tan/20">
+                        <div class="absolute inset-0 flex items-center justify-center p-8">
+                            <div class="relative w-full max-w-sm">
+                                <!-- Map of Colombia with connections -->
+                                <div class="relative h-80 bg-camel-white rounded-lg shadow-lg p-4 flex items-center justify-center">
+                                    <svg class="w-full h-full" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+                                        <!-- Simplified Colombia map shape -->
+                                        <path d="M50,50 L150,30 L170,100 L140,200 L100,250 L60,200 L30,150 Z" fill="none" stroke="#D2B48C" stroke-width="2"/>
+                                        
+                                        <!-- Major cities as points -->
+                                        <circle cx="100" cy="100" r="6" fill="#D2B48C"/> <!-- Bogotá -->
+                                        <circle cx="50" cy="150" r="4" fill="#D2B48C"/> <!-- Medellín -->
+                                        <circle cx="30" cy="120" r="4" fill="#D2B48C"/> <!-- Cali -->
+                                        <circle cx="140" cy="70" r="4" fill="#D2B48C"/> <!-- Barranquilla -->
+                                        <circle cx="120" cy="180" r="4" fill="#D2B48C"/> <!-- Bucaramanga -->
+                                        
+                                        <!-- Connection lines -->
+                                        <path class="circuit-line" d="M100,100 L50,150" stroke="#D2B48C" stroke-width="1"/>
+                                        <path class="circuit-line" d="M100,100 L30,120" stroke="#D2B48C" stroke-width="1" style="animation-delay: 0.2s"/>
+                                        <path class="circuit-line" d="M100,100 L140,70" stroke="#D2B48C" stroke-width="1" style="animation-delay: 0.4s"/>
+                                        <path class="circuit-line" d="M100,100 L120,180" stroke="#D2B48C" stroke-width="1" style="animation-delay: 0.6s"/>
+                                        
+                                        <!-- Pulse animations on cities -->
+                                        <circle cx="100" cy="100" r="10" fill="#D2B48C" opacity="0.3" class="animate-pulse-slow"/>
+                                        <circle cx="50" cy="150" r="8" fill="#D2B48C" opacity="0.3" class="animate-pulse-slow" style="animation-delay: 0.5s"/>
+                                        <circle cx="30" cy="120" r="8" fill="#D2B48C" opacity="0.3" class="animate-pulse-slow" style="animation-delay: 1s"/>
+                                        <circle cx="140" cy="70" r="8" fill="#D2B48C" opacity="0.3" class="animate-pulse-slow" style="animation-delay: 1.5s"/>
+                                        <circle cx="120" cy="180" r="8" fill="#D2B48C" opacity="0.3" class="animate-pulse-slow" style="animation-delay: 2s"/>
+                                        
+                                        <!-- Labels -->
+                                        <text x="100" y="90" text-anchor="middle" fill="#000000" font-size="6">Bogotá</text>
+                                        <text x="50" y="140" text-anchor="middle" fill="#000000" font-size="6">Medellín</text>
+                                        <text x="30" y="110" text-anchor="middle" fill="#000000" font-size="6">Cali</text>
+                                        <text x="140" y="60" text-anchor="middle" fill="#000000" font-size="6">Barranquilla</text>
+                                        <text x="120" y="170" text-anchor="middle" fill="#000000" font-size="6">Bucaramanga</text>
+                                    </svg>
+                                    
+                                    <div class="absolute bottom-4 right-4 bg-camel-cream rounded-lg px-3 py-1.5 text-xs font-medium text-camel-black border border-camel-tan/20">
+                                        Expansión Nacional
+                                    </div>
+                                </div>
+                                
+                                <!-- Vision stats -->
+                                <div class="grid grid-cols-3 gap-3 mt-4">
+                                    <div class="bg-camel-cream rounded-lg p-3 text-center">
+                                        <div class="text-xl font-bold text-camel-black">2025</div>
+                                        <div class="text-xs text-camel-black/70">Expansión LATAM</div>
+                                    </div>
+                                    <div class="bg-camel-cream rounded-lg p-3 text-center">
+                                        <div class="text-xl font-bold text-camel-black">10K+</div>
+                                        <div class="text-xs text-camel-black/70">Freelancers</div>
+                                    </div>
+                                    <div class="bg-camel-cream rounded-lg p-3 text-center">
+                                        <div class="text-xl font-bold text-camel-black">5K+</div>
+                                        <div class="text-xs text-camel-black/70">Empresas</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Decorative elements -->
+                    <div class="absolute -right-6 top-1/4 w-12 h-12 bg-camel-tan rounded-lg rotate-12 animate-float" style="animation-delay: 1s;"></div>
+                    <div class="absolute -left-6 bottom-1/4 w-12 h-12 bg-camel-goldenBeige rounded-full animate-float" style="animation-delay: 1.5s;"></div>
+                </div>
+                <div class="space-y-8 animate-slide-up">
+                    <div>
+                        <div class="inline-block px-3 py-1 bg-camel-lightBeige text-camel-black rounded-full text-sm font-medium shadow-sm border border-camel-tan/20 mb-4">
+                            Nuestra Misión
+                        </div>
+                        <h2 class="text-3xl font-bold text-camel-black mb-4">Transformando el mercado freelance colombiano</h2>
+                        <p class="text-lg text-camel-black/80">
+                            Transformar el mercado freelance colombiano, creando un ecosistema donde profesionales 
+                            independientes puedan desarrollar todo su potencial, acceder a oportunidades de calidad 
+                            y construir carreras sostenibles, mientras las empresas encuentran el talento ideal 
+                            para sus proyectos en un entorno seguro y eficiente.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="inline-block px-3 py-1 bg-camel-lightBeige text-camel-black rounded-full text-sm font-medium shadow-sm border border-camel-tan/20 mb-4">
+                            Nuestra Visión
+                        </div>
+                        <h2 class="text-3xl font-bold text-camel-black mb-4">Liderando el trabajo freelance en Latinoamérica</h2>
+                        <p class="text-lg text-camel-black/80">
+                            Ser la plataforma líder de trabajo freelance en Colombia y expandirnos por Latinoamérica, 
+                            reconocidos por nuestro compromiso con la calidad, la ética profesional y el desarrollo 
+                            del talento local, contribuyendo al crecimiento económico y la innovación en la región.
+                        </p>
+                    </div>
+                    <div class="pt-4">
+                        <a href="#" class="relative overflow-hidden group bg-camel-black text-camel-white px-6 py-3 rounded-lg transition-all duration-300 hover:shadow-lg shadow-md inline-block">
+                            <span class="relative z-10 flex items-center">
+                                Conoce más sobre nosotros
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span class="absolute inset-0 w-0 bg-camel-tan/20 transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us - Developers -->
+    <section class="py-20 bg-camel-cream relative overflow-hidden" id="team">
+        <div class="absolute inset-0 bg-dots-pattern"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <div class="inline-block px-3 py-1 bg-camel-lightBeige text-camel-black rounded-full text-sm font-medium shadow-sm border border-camel-tan/20 mb-4">
+                    Equipo
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-camel-black mb-6">Sobre Nosotros</h2>
+                <p class="text-lg text-camel-black/80">
+                    Somos un equipo de 5 desarrolladores apasionados por transformar el trabajo freelance en Colombia.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+                <!-- Developer 1 -->
+                <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 text-center animate-slide-up stagger-1">
+                    <!-- Developer image placeholder -->
+                    <div class="w-32 h-32 bg-gradient-to-br from-camel-tan to-camel-goldenBeige rounded-full mx-auto mb-4 flex items-center justify-center text-camel-white font-bold shadow-md relative overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-circuit-pattern opacity-20"></div>
+                        <span class="relative z-10 text-2xl">D1</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-camel-black mb-1">Desarrollador 1</h3>
+                    <p class="text-camel-black/70 mb-3">Especialista en Backend</p>
+                    <div class="inline-block px-3 py-1 bg-camel-lightBeige text-camel-black rounded-full text-xs font-medium mb-4">
+                        Python & Node.js
+                    </div>
+                    <p class="text-camel-black/80 text-sm">
+                        Apasionado por crear soluciones tecnológicas que transformen la forma en que trabajamos.
+                    </p>
+                    <div class="flex justify-center space-x-3 mt-4">
+                        <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Developer 2 -->
+                <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 text-center animate-slide-up stagger-2">
+                    <!-- Developer image placeholder -->
+                    <div class="w-32 h-32 bg-gradient-to-br from-camel-tan to-camel-goldenBeige rounded-full mx-auto mb-4 flex items-center justify-center text-camel-white font-bold shadow-md relative overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-circuit-pattern opacity-20"></div>
+                        <span class="relative z-10 text-2xl">D2</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-camel-black mb-1">Desarrollador 2</h3>
+                    <p class="text-camel-black/70 mb-3">Especialista en Frontend</p>
+                    <div class="inline-block px-3 py-1 bg-camel-lightBeige text-camel-black rounded-full text-xs font-medium mb-4">
+                        React & UI/UX
+                    </div>
+                    <p class="text-camel-black/80 text-sm">
+                        Creativo y detallista, enfocado en crear experiencias de usuario excepcionales.
+                    </p>
+                    <div class="flex justify-center space-x-3 mt-4">
+                        <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Developer 3 -->
+                <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 text-center animate-slide-up stagger-3">
+                    <!-- Developer image placeholder -->
+                    <div class="w-32 h-32 bg-gradient-to-br from-camel-tan to-camel-goldenBeige rounded-full mx-auto mb-4 flex items-center justify-center text-camel-white font-bold shadow-md relative overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-circuit-pattern opacity-20"></div>
+                        <span class="relative z-10 text-2xl">D3</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-camel-black mb-1">Desarrollador 3</h3>
+                    <p class="text-camel-black/70 mb-3">Especialista en Backend</p>
+                    <div class="inline-block px-3 py-1 bg-camel-lightBeige text-camel-black rounded-full text-xs font-medium mb-4">
+                        Bases de Datos & API
+                    </div>
+                    <p class="text-camel-black/80 text-sm">
+                        Experto en arquitectura de sistemas y bases de datos para plataformas escalables.
+                    </p>
+                    <div class="flex justify-center space-x-3 mt-4">
+                        <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Developer 4 -->
+                <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 text-center animate-slide-up stagger-4">
+                    <!-- Developer image placeholder -->
+                    <div class="w-32 h-32 bg-gradient-to-br from-camel-tan to-camel-goldenBeige rounded-full mx-auto mb-4 flex items-center justify-center text-camel-white font-bold shadow-md relative overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-circuit-pattern opacity-20"></div>
+                        <span class="relative z-10 text-2xl">D4</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-camel-black mb-1">Desarrollador 4</h3>
+                    <p class="text-camel-black/70 mb-3">Especialista en Frontend</p>
+                    <div class="inline-block px-3 py-1 bg-camel-lightBeige text-camel-black rounded-full text-xs font-medium mb-4">
+                        UX/UI & Animaciones
+                    </div>
+                    <p class="text-camel-black/80 text-sm">
+                        Innovador en diseño de interfaces y experiencias de usuario intuitivas.
+                    </p>
+                    <div class="flex justify-center space-x-3 mt-4">
+                        <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Developer 5 -->
+                <div class="group bg-camel-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-camel-tan/10 text-center animate-slide-up stagger-5">
+                    <!-- Developer image placeholder -->
+                    <div class="w-32 h-32 bg-gradient-to-br from-camel-tan to-camel-goldenBeige rounded-full mx-auto mb-4 flex items-center justify-center text-camel-white font-bold shadow-md relative overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-circuit-pattern opacity-20"></div>
+                        <span class="relative z-10 text-2xl">D5</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-camel-black mb-1">Desarrollador 5</h3>
+                    <p class="text-camel-black/70 mb-3">Especialista en DevOps</p>
+                    <div class="inline-block px-3 py-1 bg-camel-lightBeige text-camel-black rounded-full text-xs font-medium mb-4">
+                        Seguridad & Infraestructura
+                    </div>
+                    <p class="text-camel-black/80 text-sm">
+                        Enfocado en seguridad y rendimiento para garantizar plataformas confiables.
+                    </p>
+                    <div class="flex justify-center space-x-3 mt-4">
+                        <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gradient-to-r from-camel-tan to-camel-goldenBeige text-camel-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-circuit-pattern opacity-10"></div>
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">¡Únete a la revolución freelance!</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">
+                Conectamos talento con oportunidades y revolucionamos el trabajo freelance en Colombia.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#register" class="relative overflow-hidden group bg-camel-white text-camel-black px-8 py-4 rounded-lg transition-all duration-300 hover:shadow-lg shadow-md text-lg font-medium">
+                    <span class="relative z-10 flex items-center">
+                        Comenzar ahora
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                    <span class="absolute inset-0 w-0 bg-camel-cream transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#learn-more" class="relative overflow-hidden group border-2 border-camel-white text-camel-white px-8 py-4 rounded-lg transition-all duration-300 hover:shadow-lg text-lg font-medium">
+                    <span class="relative z-10">Conocer más</span>
+                    <span class="absolute inset-0 w-0 bg-camel-white/20 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-camel-black text-camel-cream py-16 relative overflow-hidden">
+        <div class="absolute inset-0 bg-tech-pattern opacity-5"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <!-- Logo -->
+                        <div class="relative w-10 h-10 bg-gradient-to-br from-camel-tan to-camel-goldenBeige rounded-lg flex items-center justify-center text-camel-white font-bold shadow-lg overflow-hidden">
+                            <div class="absolute inset-0 bg-circuit-pattern opacity-20"></div>
+                            <span class="relative z-10">C</span>
+                        </div>
+                        <span class="text-2xl font-bold gradient-text">Camello</span>
+                    </div>
+                    <p class="text-camel-cream/80 mb-6">
+                        La plataforma freelance que revoluciona el trabajo independiente en Colombia, conectando talento con oportunidades.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-camel-tan/10 flex items-center justify-center text-camel-tan hover:bg-camel-tan hover:text-camel-black transition-all duration-300">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-camel-tan/10 flex items-center justify-center text-camel-tan hover:bg-camel-tan hover:text-camel-black transition-all duration-300">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-camel-tan/10 flex items-center justify-center text-camel-tan hover:bg-camel-tan hover:text-camel-black transition-all duration-300">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-camel-tan/10 flex items-center justify-center text-camel-tan hover:bg-camel-tan hover:text-camel-black transition-all duration-300">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.717 2 2 6.717 2 12c0 5.283 4.717 10 10 10 5.283 0 10-4.717 10-10 0-5.283-4.717-10-10-10zm-1.32 15.508c-1.562 0-2.72-.705-2.72-1.811 0-.698.56-1.375 1.454-1.375h.031c.847 0 1.252.503 1.252 1.375 0 .527-.159.931-.503 1.196-.345.279-.848.615-1.514.615zm6.254-5.513c-.534 1.6-1.977 2.898-4.091 2.898l-.001-.013c-.653 0-1.158-.162-1.606-.344-.196-.085-.513-.182-.513-.182-.226.147-.498.262-.806.262-.693 0-1.254-.562-1.254-1.254 0-.694.561-1.258 1.254-1.258.289 0 .562.1.776.27l.044-.011s.324-.062.521-.1c.196-.036.402-.056.609-.056 1.346 0 2.203.704 2.203 1.543 0 .658-.474 1.02-1.111 1.02-.422 0-.798-.131-1.078-.365-.28-.233-.467-.559-.467-.91 0-.58.451-1.102 1.102-1.102.056 0 .115.007.173.013-.167-.168-.422-.276-.71-.276-.422 0-.762.342-.762.762 0 .422.34.762.762.762.33 0 .615-.21.722-.51.022-.054.125-.365.125-.365.043-.118.153-.196.278-.196.166 0 .299.134.299.3 0 .037-.007.074-.019.108 0 0-.076.342-.076.342-.118.517-.614.91-1.329.91-.749 0-1.355-.606-1.355-1.354 0-.748.606-1.355 1.355-1.355.487 0 .942.204 1.259.562.066-.112.157-.21.265-.29-.422-.39-.993-.63-1.631-.63-1.33 0-2.41 1.079-2.41 2.41s1.08 2.41 2.41 2.41c1.064 0 1.936-.7 2.265-1.643.03-.085.043-.17.043-.255 0-.422-.343-.762-.764-.762z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold text-camel-white mb-6">Enlaces</h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <a href="#" class="text-camel-cream/80 hover:text-camel-tan transition-colors flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 bg-camel-tan rounded-full"></span>
+                                Inicio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#features" class="text-camel-cream/80 hover:text-camel-tan transition-colors flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 bg-camel-tan rounded-full"></span>
+                                Características
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#about" class="text-camel-cream/80 hover:text-camel-tan transition-colors flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 bg-camel-tan rounded-full"></span>
+                                Nosotros
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#mission" class="text-camel-cream/80 hover:text-camel-tan transition-colors flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 bg-camel-tan rounded-full"></span>
+                                Misión y Visión
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#team" class="text-camel-cream/80 hover:text-camel-tan transition-colors flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 bg-camel-tan rounded-full"></span>
+                                Equipo
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold text-camel-white mb-6">Recursos</h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <a href="#" class="text-camel-cream/80 hover:text-camel-tan transition-colors flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 bg-camel-tan rounded-full"></span>
+                                Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-camel-cream/80 hover:text-camel-tan transition-colors flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 bg-camel-tan rounded-full"></span>
+                                Guías
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-camel-cream/80 hover:text-camel-tan transition-colors flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 bg-camel-tan rounded-full"></span>
+                                Tutoriales
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-camel-cream/80 hover:text-camel-tan transition-colors flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 bg-camel-tan rounded-full"></span>
+                                FAQ
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-camel-cream/80 hover:text-camel-tan transition-colors flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 bg-camel-tan rounded-full"></span>
+                                Soporte
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold text-camel-white mb-6">Contacto</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <div class="w-5 h-5 rounded-full bg-camel-tan/10 flex items-center justify-center text-camel-tan mt-0.5 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <span class="text-camel-cream/80">Bogotá, Colombia</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-5 h-5 rounded-full bg-camel-tan/10 flex items-center justify-center text-camel-tan mt-0.5 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <span class="text-camel-cream/80">contacto@camello.co</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-5 h-5 rounded-full bg-camel-tan/10 flex items-center justify-center text-camel-tan mt-0.5 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                            </div>
+                            <span class="text-camel-cream/80">+57 300 123 4567</span>
+                        </li>
+                    </ul>
+                    
+                    <!-- Newsletter -->
+                    <div class="mt-8">
+                        <h4 class="text-sm font-semibold text-camel-white mb-3">Suscríbete a nuestro newsletter</h4>
+                        <div class="flex">
+                            <input type="email" placeholder="Tu email" class="bg-camel-black/50 border border-camel-tan/30 text-camel-cream rounded-l-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-camel-tan/50">
+                            <button class="bg-camel-tan text-camel-black px-4 py-2 rounded-r-lg hover:bg-camel-goldenBeige transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer bottom -->
+            <div class="border-t border-camel-tan/20 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-camel-cream/60 text-sm mb-4 md:mb-0">
+                    &copy; <span id="current-year"></span> Camello. Todos los derechos reservados.
+                </p>
+                <div class="flex gap-6">
+                    <a href="#" class="text-camel-cream/60 hover:text-camel-tan text-sm transition-colors">Términos y Condiciones</a>
+                    <a href="#" class="text-camel-cream/60 hover:text-camel-tan text-sm transition-colors">Política de Privacidad</a>
+                    <a href="#" class="text-camel-cream/60 hover:text-camel-tan text-sm transition-colors">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-camel-black text-camel-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300 z-50 hover:bg-camel-tan">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <!-- JavaScript for interactivity -->
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Features tabs
+        const tabFreelancers = document.getElementById('tab-freelancers');
+        const tabClients = document.getElementById('tab-clients');
+        const contentFreelancers = document.getElementById('content-freelancers');
+        const contentClients = document.getElementById('content-clients');
+        
+        tabFreelancers.addEventListener('click', () => {
+            tabFreelancers.classList.add('bg-camel-tan', 'text-camel-white');
+            tabFreelancers.classList.remove('text-camel-black');
+            tabClients.classList.remove('bg-camel-tan', 'text-camel-white');
+            tabClients.classList.add('text-camel-black');
+            contentFreelancers.classList.remove('hidden');
+            contentClients.classList.add('hidden');
+        });
+        
+        tabClients.addEventListener('click', () => {
+            tabClients.classList.add('bg-camel-tan', 'text-camel-white');
+            tabClients.classList.remove('text-camel-black');
+            tabFreelancers.classList.remove('bg-camel-tan', 'text-camel-white');
+            tabFreelancers.classList.add('text-camel-black');
+            contentClients.classList.remove('hidden');
+            contentFreelancers.classList.add('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.add('opacity-0', 'invisible');
+                backToTopButton.classList.remove('opacity-100', 'visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Reveal animations on scroll
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-right, .animate-scale-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.style.visibility = 'visible';
+                }
+            });
+        }
+        
+        // Hide elements initially
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-right, .animate-scale-in');
+            elements.forEach(element => {
+                if (!element.classList.contains('stagger-1') && 
+                    !element.classList.contains('stagger-2') && 
+                    !element.classList.contains('stagger-3') && 
+                    !element.classList.contains('stagger-4') && 
+                    !element.classList.contains('stagger-5')) {
+                    element.style.visibility = 'hidden';
+                }
+            });
+            
+            // Initial check
+            revealOnScroll();
+        });
+        
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('resize', revealOnScroll);
+    </script>
+</body>
+</html>
