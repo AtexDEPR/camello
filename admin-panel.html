@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrador - Camello | La Plataforma Freelance de Colombia</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        camel: {
+                            tan: '#D2B48C',
+                            lightBeige: '#F6ECD4',
+                            goldenBeige: '#DBC29D',
+                            cream: '#FFF9E8',
+                            white: '#FFFFFF',
+                            black: '#000000'
+                        },
+                        neon: {
+                            purple: '#8A2BE2',
+                            glow: 'rgba(138, 43, 226, 0.6)',
+                            blue: '#4D4DFF',
+                            green: '#00C853',
+                            red: '#FF5252'
+                        },
+                        status: {
+                            success: '#4CAF50',
+                            warning: '#FFC107',
+                            danger: '#F44336',
+                            info: '#2196F3'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 0.8s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'slide-right': 'slideRight 0.8s ease-out forwards',
+                        'scale-in': 'scaleIn 0.8s ease-out forwards',
+                        'glow': 'glow 1.5s ease-in-out infinite alternate',
+                        'data-pulse': 'dataPulse 2s ease-in-out infinite',
+                        'spin-slow': 'spin 8s linear infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideRight: {
+                            '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        scaleIn: {
+                            '0%': { transform: 'scale(0.9)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #8A2BE2, 0 0 10px #8A2BE2' },
+                            '100%': { boxShadow: '0 0 10px #8A2BE2, 0 0 20px #8A2BE2, 0 0 30px #8A2BE2' }
+                        },
+                        dataPulse: {
+                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+                            '50%': { opacity: '0.8', transform: 'scale(0.95)' }
+                        }
+                    },
+                    backgroundImage: {
+                        'circuit-pattern': "url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23DBC29D' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+                        'tech-pattern': "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23DBC29D' fill-opacity='0.1'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+                        'data-grid': "url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0V0zm1 1v98h98V1H1zm48 48h2v2h-2v-2zm0 4h2v2h-2v-2zm-4-4h2v2h-2v-2zm0 4h2v2h-2v-2zm8-4h2v2h-2v-2zm0 4h2v2h-2v-2z' fill='%23DBC29D' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E\")"
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- ApexCharts para gráficos avanzados -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        /* Custom animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideRight {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px #8A2BE2, 0 0 10px #8A2BE2; }
+            100% { box-shadow: 0 0 10px #8A2BE2, 0 0 20px #8A2BE2, 0 0 30px #8A2BE2; }
+        }
+        
+        @keyframes dataPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(0.95); }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-right {
+            animation: slideRight 0.8s ease-out forwards;
+        }
+        
+        .animate-scale-in {
+            animation: scaleIn 0.8s ease-out forwards;
+        }
+        
+        .animate-glow {
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+        
+        .animate-data-pulse {
+            animation: dataPulse 2s ease-in-out infinite;
+        }
+        
+        /* Staggered animation delay */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #D2B48C, #DBC29D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        .gradient-text-purple {
+            background: linear-gradient(90deg, #8A2BE2, #4D4DFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        /* Circuit board animation */
+        .circuit-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 3s linear forwards;
+        }
+        
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        /* Neon border effect */
+        .neon-border {
+            border: 2px solid #8A2BE2;
+            box-shadow: 0 0 5px #8A2BE2, 0 0 10px #8A2BE2;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+        
+        .neon-border-blue {
+            border: 2px solid #4D4DFF;
+            box-shadow: 0 0 5px #4D4DFF, 0 0 10px #4D4DFF;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+        
+        .neon-border-green {
+            border: 2px solid #00C853;
+            box-shadow: 0 0 5px #00C853, 0 0 10px #00C853;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+        
+        .neon-border-red {
+            border: 2px solid #FF5252;
+            box-shadow: 0 0 5px #FF5252, 0 0 10px #FF5252;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+        
+        /* Sidebar styles */
+        .sidebar {
+            width: 280px;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar.collapsed {
+            width: 80px;
+        }
+        
+        .sidebar-item span {
+            transition: opacity 0.3s ease;
+        }
+        
+        .sidebar.collapsed .sidebar-item span {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .sidebar.collapsed .sidebar-logo span {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .sidebar.collapsed .sidebar-toggle svg {
+            transform: rotate(180deg);
+        }
+        
+        .main-content {
+            transition: margin-left 0.3s ease;
+        }
+        
+        .main-content.sidebar-expanded {
+            margin-left: 280px;
+        }
+        
+        .main-content.sidebar-collapsed {
+            margin-left: 80px;
+        }
+        
+        /* Data table styles */
+        .data-table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        
+        .data-table th {
+            position: sticky;
+            top: 0;
+            background-color: #F6ECD4;
+            z-index: 10;
+        }
+        
+        .data-table tbody tr {
+            transition: all 0.2s ease;
+        }
+        
+        .data-table tbody tr:hover {
+            background-color: rgba(210, 180, 140, 0.1);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(210, 180, 140, 0.1);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(210, 180, 140, 0.5);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(210, 180, 140, 0.8);
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 120px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -280px;
+                z-index: 50;
+            }
+            
+            .sidebar.open {
+                left: 0;
+            }
+            
+            .main-content {
+                margin-left: 0 !important;
+            }
+            
+            .mobile-sidebar-toggle {
+                display: block !important;
+            }
+        }
+        
+        /* Pulse effect for live data */
+        .pulse-dot {
+            position: relative;
+        }
+        
+        .pulse-dot::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #00C853;
+            top: 50%;
+            left: -16px;
+            transform: translateY(-50%);
+        }
+        
+        .pulse-dot::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: rgba(0, 200, 83, 0.4);
+            top: 50%;
+            left: -20px;
+            transform: translateY(-50%);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: translateY(-50%) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-50%) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        /* Hexagon grid for tech background */
+        .hexagon-grid {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill='%23DBC29D' fill-opacity='0.05'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Circular progress */
+        .circular-progress {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+        
+        .circular-progress svg {
+            transform: rotate(-90deg);
+        }
+        
+        .circular-progress circle {
+            fill: none;
+            stroke-width: 8;
+            stroke-linecap: round;
+        }
+        
+        .circular-progress .bg {
+            stroke: rgba(210, 180, 140, 0.2);
+        }
+        
+        .circular-progress .progress {
+            stroke: #D2B48C;
+            transition: stroke-dashoffset 0.5s ease;
+        }
+        
+        .circular-progress .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        /* Notification badge */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: #FF5252;
+            color: white;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Status indicators */
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+        
+        .status-active {
+            background-color: #4CAF50;
+            box-shadow: 0 0 5px #4CAF50;
+        }
+        
+        .status-pending {
+            background-color: #FFC107;
+            box-shadow: 0 0 5px #FFC107;
+        }
+        
+        .status-inactive {
+            background-color: #F44336;
+            box-shadow: 0 0 5px #F44336;
+        }
+        
+        /* Data card hover effect */
+        .data-card {
+            transition: all 0.3s ease;
+        }
+        
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Animated background */
+        .animated-bg {
+            background: linear-gradient(-45deg, rgba(210, 180, 140, 0.1), rgba(219, 194, 157, 0.1), rgba(246, 236, 212, 0.1), rgba(255, 249, 232, 0.1));
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+<body class="bg-camel-cream text-camel-black font-sans min-h-screen">
+    <!-- Mobile sidebar toggle button (visible only on mobile) -->
+    <button id="mobile-sidebar-toggle" class="fixed top-4 left-4 z-50 bg-camel-tan text-camel-white p-2 rounded-lg shadow-lg hidden mobile-sidebar-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    </button>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar fixed top-0 left-0 h-full bg-camel-black shadow-lg z-40 overflow-y-auto">
+        <div class="p-4">
+            <!-- Logo -->
+            <div class="sidebar-logo flex items-center gap-3 mb-8">
+              <div class="relative w-10 h-10 bg-white rounded-full flex items-center justify-center text-camel-white font-bold shadow-lg overflow-hidden">
+                <div class="absolute inset-0 bg-circuit-pattern opacity-20"></div>
+                <span class="relative z-10"><img src="./fotos_facheras/camello.png" alt=""></span>
+                <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-camel-cream rounded-full animate-pulse-slow"></div>
+              </div>
+                <span class="text-2xl font-bold gradient-text">Camello</span>
+            </div>
+            
+            <!-- Admin info -->
+            <div class="mb-8">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-12 h-12 rounded-full bg-camel-tan flex items-center justify-center text-camel-white font-bold">
+                        <span>JM</span>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-camel-white">Javier Martínez</h3>
+                        <p class="text-sm text-camel-cream/60">Super Administrador</p>
+                    </div>
+                </div>
+                <div class="bg-camel-black/50 rounded-lg p-3 mt-3 border border-camel-tan/20">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-xs text-camel-cream/70">Estado del sistema</span>
+                        <span class="text-xs font-medium text-camel-cream">Operativo</span>
+                    </div>
+                    <div class="w-full h-2 bg-camel-black/50 rounded-full">
+                        <div class="h-2 bg-status-success rounded-full" style="width: 98%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Menu items -->
+            <nav class="space-y-1">
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-lg bg-camel-tan text-camel-black hover:bg-camel-tan hover:text-camel-black transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-lg text-camel-cream hover:bg-camel-tan hover:text-camel-black transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                    </svg>
+                    <span>Gestión de Usuarios</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-lg text-camel-cream hover:bg-camel-tan hover:text-camel-black transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+                        <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                    </svg>
+                    <span>Proyectos y Ofertas</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-lg text-camel-cream hover:bg-camel-tan hover:text-camel-black transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Finanzas</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-lg text-camel-cream hover:bg-camel-tan hover:text-camel-black transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                    </svg>
+                    <span>Analítica</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-lg text-camel-cream hover:bg-camel-tan hover:text-camel-black transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Soporte</span>
+                    <span class="ml-auto bg-neon-red text-camel-white text-xs font-medium px-2 py-0.5 rounded-full">12</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-lg text-camel-cream hover:bg-camel-tan hover:text-camel-black transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Configuración</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-lg text-camel-cream hover:bg-camel-tan hover:text-camel-black transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Logs del Sistema</span>
+                </a>
+                <a href="login.html" class="sidebar-item flex items-center gap-3 p-3 rounded-lg text-camel-cream hover:bg-red-500 hover:text-camel-white transition-colors mt-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Cerrar Sesión</span>
+                </a>
+            </nav>
+        </div>
+        
+        <!-- Sidebar toggle button -->
+        <button id="sidebar-toggle" class="sidebar-toggle absolute top-1/2 -right-3 transform -translate-y-1/2 w-6 h-12 bg-camel-tan rounded-r-md flex items-center justify-center text-camel-white">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Main content -->
+    <div id="main-content" class="main-content sidebar-expanded min-h-screen">
+        <!-- Header -->
+        <header class="sticky top-0 z-30 glass border-b border-camel-tan/20">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold">Panel de Administración</h1>
+                    <span class="ml-4 px-2 py-1 bg-camel-tan/10 text-camel-tan text-xs font-medium rounded-md">v2.5.3</span>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Buscar en el sistema..." class="pl-10 pr-4 py-2 rounded-lg border border-camel-tan/30 focus:outline-none focus:ring-2 focus:ring-camel-tan/50 w-64">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-camel-black/50" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    
+                    <div class="relative">
+                        <button id="notifications-btn" class="relative p-2 rounded-full hover:bg-camel-lightBeige transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                            </svg>
+                            <span class="absolute top-0 right-0 w-4 h-4 bg-neon-red rounded-full flex items-center justify-center text-white text-xs">8</span>
+                        </button>
+                    </div>
+                    
+                    <div class="relative">
+                        <button id="tasks-btn" class="relative p-2 rounded-full hover:bg-camel-lightBeige transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="absolute top-0 right-0 w-4 h-4 bg-status-warning rounded-full flex items-center justify-center text-white text-xs">5</span>
+                        </button>
+                    </div>
+                    
+                    <div class="h-8 w-px bg-camel-tan/20"></div>
+                    
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-camel-tan flex items-center justify-center text-camel-white font-bold">
+                            <span>JM</span>
+                        </div>
+                        <span class="text-sm font-medium hidden md:block">Javier Martínez</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-black/50" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main content area -->
+        <div class="container mx-auto px-4 py-8">
+            <!-- Status overview -->
+            <div class="mb-8">
+                <div class="flex flex-wrap items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold">Estado del Sistema</h2>
+                    <div class="flex items-center">
+                        <span class="text-sm text-camel-black/70 mr-2">Última actualización:</span>
+                        <span class="text-sm font-medium pulse-dot pl-4">Hace 2 minutos</span>
+                    </div>
+                </div>
+                
+                <div class="flex flex-wrap -mx-4">
+                    <!-- Status card 1 -->
+                    <div class="w-full sm:w-1/2 lg:w-1/4 px-4 mb-8">
+                        <div class="data-card bg-camel-white rounded-xl shadow-md p-6 h-full">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold">Usuarios Activos</h3>
+                                <div class="w-10 h-10 rounded-full bg-status-success/10 flex items-center justify-center text-status-success">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex items-end justify-between">
+                                <div>
+                                    <p class="text-3xl font-bold">2,847</p>
+                                    <p class="text-sm text-camel-black/60">Usuarios en línea</p>
+                                </div>
+                                <div class="flex items-center text-status-success">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="ml-1 text-sm font-medium">+12.5%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Status card 2 -->
+                    <div class="w-full sm:w-1/2 lg:w-1/4 px-4 mb-8">
+                        <div class="data-card bg-camel-white rounded-xl shadow-md p-6 h-full">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold">Proyectos Activos</h3>
+                                <div class="w-10 h-10 rounded-full bg-neon-blue/10 flex items-center justify-center text-neon-blue">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex items-end justify-between">
+                                <div>
+                                    <p class="text-3xl font-bold">1,356</p>
+                                    <p class="text-sm text-camel-black/60">Proyectos en curso</p>
+                                </div>
+                                <div class="flex items-center text-status-success">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="ml-1 text-sm font-medium">+8.3%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Status card 3 -->
+                    <div class="w-full sm:w-1/2 lg:w-1/4 px-4 mb-8">
+                        <div class="data-card bg-camel-white rounded-xl shadow-md p-6 h-full">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold">Ingresos</h3>
+                                <div class="w-10 h-10 rounded-full bg-neon-green/10 flex items-center justify-center text-neon-green">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex items-end justify-between">
+                                <div>
+                                    <p class="text-3xl font-bold">$245,890</p>
+                                    <p class="text-sm text-camel-black/60">Este mes</p>
+                                </div>
+                                <div class="flex items-center text-status-success">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="ml-1 text-sm font-medium">+15.2%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Status card 4 -->
+                    <div class="w-full sm:w-1/2 lg:w-1/4 px-4 mb-8">
+                        <div class="data-card bg-camel-white rounded-xl shadow-md p-6 h-full">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold">Tickets de Soporte</h3>
+                                <div class="w-10 h-10 rounded-full bg-neon-red/10 flex items-center justify-center text-neon-red">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex items-end justify-between">
+                                <div>
+                                    <p class="text-3xl font-bold">12</p>
+                                    <p class="text-sm text-camel-black/60">Sin resolver</p>
+                                </div>
+                                <div class="flex items-center text-status-danger">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M12 13a1 1 0 100 2h5a1 1 0 001-1V9a1 1 0 10-2 0v2.586l-4.293-4.293a1 1 0 00-1.414 0L8 9.586 3.707 5.293a1 1 0 00-1.414 1.414l5 5a1 1 0 001.414 0L11 9.414 14.586 13H12z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="ml-1 text-sm font-medium">+3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Analytics and charts -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold mb-6">Analítica de la Plataforma</h2>
+                
+                <div class="flex flex-wrap -mx-4">
+                    <!-- Main chart -->
+                    <div class="w-full lg:w-2/3 px-4 mb-8">
+                        <div class="bg-camel-white rounded-xl shadow-md p-6">
+                            <div class="flex flex-wrap items-center justify-between mb-6">
+                                <h3 class="text-lg font-semibold">Actividad de la Plataforma</h3>
+                                <div class="flex items-center space-x-2">
+                                    <button class="px-3 py-1 text-sm bg-camel-tan text-camel-white rounded-md">Diario</button>
+                                    <button class="px-3 py-1 text-sm bg-camel-cream text-camel-black rounded-md">Semanal</button>
+                                    <button class="px-3 py-1 text-sm bg-camel-cream text-camel-black rounded-md">Mensual</button>
+                                </div>
+                            </div>
+                            <div class="h-80">
+                                <canvas id="activityChart"></canvas>
+                            </div>
+                            <div class="flex flex-wrap justify-center mt-4 gap-4">
+                                <div class="flex items-center">
+                                    <span class="w-3 h-3 bg-neon-purple rounded-full mr-2"></span>
+                                    <span class="text-sm">Freelancers</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-3 h-3 bg-camel-tan rounded-full mr-2"></span>
+                                    <span class="text-sm">Empresas</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-3 h-3 bg-neon-blue rounded-full mr-2"></span>
+                                    <span class="text-sm">Proyectos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Side charts -->
+                    <div class="w-full lg:w-1/3 px-4 mb-8">
+                        <div class="flex flex-col h-full">
+                            <!-- Donut chart -->
+                            <div class="bg-camel-white rounded-xl shadow-md p-6 mb-4 flex-grow">
+                                <h3 class="text-lg font-semibold mb-4">Distribución de Usuarios</h3>
+                                <div class="h-48">
+                                    <canvas id="userDistributionChart"></canvas>
+                                </div>
+                                <div class="flex flex-wrap justify-center mt-4 gap-3">
+                                    <div class="flex items-center">
+                                        <span class="w-3 h-3 bg-camel-tan rounded-full mr-2"></span>
+                                        <span class="text-xs">Freelancers (68%)</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="w-3 h-3 bg-neon-purple rounded-full mr-2"></span>
+                                        <span class="text-xs">Empresas (28%)</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="w-3 h-3 bg-camel-black rounded-full mr-2"></span>
+                                        <span class="text-xs">Administradores (4%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Gauge chart -->
+                            <div class="bg-camel-white rounded-xl shadow-md p-6 flex-grow">
+                                <h3 class="text-lg font-semibold mb-4">Rendimiento del Sistema</h3>
+                                <div class="flex justify-center">
+                                    <div class="circular-progress">
+                                        <svg width="120" height="120" viewBox="0 0 120 120">
+                                            <circle class="bg" cx="60" cy="60" r="54" />
+                                            <circle class="progress" cx="60" cy="60" r="54" stroke-dasharray="339.292" stroke-dashoffset="33.9292" />
+                                        </svg>
+                                        <div class="text">90%</div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between mt-4">
+                                    <div class="text-center">
+                                        <p class="text-xs text-camel-black/60">CPU</p>
+                                        <p class="font-medium">32%</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="text-xs text-camel-black/60">RAM</p>
+                                        <p class="font-medium">45%</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="text-xs text-camel-black/60">Disco</p>
+                                        <p class="font-medium">28%</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent activity and alerts -->
+            <div class="flex flex-wrap -mx-4 mb-8">
+                <!-- Recent activity -->
+                <div class="w-full lg:w-2/3 px-4 mb-8">
+                    <div class="bg-camel-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-semibold">Actividad Reciente</h3>
+                            <button class="text-camel-tan hover:text-camel-black transition-colors text-sm font-medium">Ver todo</button>
+                        </div>
+                        
+                        <div class="space-y-4 max-h-96 overflow-y-auto pr-2">
+                            <!-- Activity item 1 -->
+                            <div class="flex items-start gap-4 p-3 rounded-lg hover:bg-camel-cream/50 transition-colors">
+                                <div class="w-10 h-10 rounded-full bg-neon-purple/10 flex-shrink-0 flex items-center justify-center text-neon-purple">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-sm"><span class="font-medium">Carlos Rodríguez</span> se registró como freelancer</p>
+                                    <div class="flex items-center mt-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-camel-black/50" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="text-xs text-camel-black/50 ml-1">Hace 5 minutos</span>
+                                    </div>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <button class="text-camel-tan hover:text-camel-black transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Activity item 2 -->
+                            <div class="flex items-start gap-4 p-3 rounded-lg hover:bg-camel-cream/50 transition-colors">
+                                <div class="w-10 h-10 rounded-full bg-neon-blue/10 flex-shrink-0 flex items-center justify-center text-neon-blue">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+                                        <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                                    </svg>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-sm"><span class="font-medium">InnovaTech Colombia</span> publicó un nuevo proyecto: <span class="text-camel-tan">Desarrollo de API REST</span></p>
+                                    <div class="flex items-center mt-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-camel-black/50" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="text-xs text-camel-black/50 ml-1">Hace 28 minutos</span>
+                                    </div>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <button class="text-camel-tan hover:text-camel-black transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Activity item 3 -->
+                            <div class="flex items-start gap-4 p-3 rounded-lg hover:bg-camel-cream/50 transition-colors">
+                                <div class="w-10 h-10 rounded-full bg-neon-green/10 flex-shrink-0 flex items-center justify-center text-neon-green">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-sm">Se procesó un pago de <span class="font-medium">$2,500,000 COP</span> a <span class="font-medium">Laura Martínez</span></p>
+                                    <div class="flex items-center mt-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-camel-black/50" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="text-xs text-camel-black/50 ml-1">Hace 1 hora</span>
+                                    </div>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <button class="text-camel-tan hover:text-camel-black transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Activity item 4 -->
+                            <div class="flex items-start gap-4 p-3 rounded-lg hover:bg-camel-cream/50 transition-colors">
+                                <div class="w-10 h-10 rounded-full bg-neon-red/10 flex-shrink-0 flex items-center justify-center text-neon-red">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-sm">Se reportó un problema con el sistema de pagos</p>
+                                    <div class="flex items-center mt-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-camel-black/50" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="text-xs text-camel-black/50 ml-1">Hace 2 horas</span>
+                                    </div>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <button class="text-camel-tan hover:text-camel-black transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Activity item 5 -->
+                            <div class="flex items-start gap-4 p-3 rounded-lg hover:bg-camel-cream/50 transition-colors">
+                                <div class="w-10 h-10 rounded-full bg-status-success/10 flex-shrink-0 flex items-center justify-center text-status-success">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-sm">Se completó el proyecto <span class="font-medium">Diseño UX/UI para aplicación móvil</span></p>
+                                    <div class="flex items-center mt-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-camel-black/50" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="text-xs text-camel-black/50 ml-1">Hace 3 horas</span>
+                                    </div>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <button class="text-camel-tan hover:text-camel-black transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- System alerts -->
+                <div class="w-full lg:w-1/3 px-4 mb-8">
+                    <div class="bg-camel-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-semibold">Alertas del Sistema</h3>
+                            <span class="px-2 py-1 bg-neon-red/10 text-neon-red text-xs font-medium rounded-md">8 nuevas</span>
+                        </div>
+                        
+                        <div class="space-y-4 max-h-96 overflow-y-auto pr-2">
+                            <!-- Alert item 1 -->
+                            <div class="p-3 rounded-lg border-l-4 border-neon-red bg-neon-red/5">
+                                <div class="flex justify-between">
+                                    <h4 class="font-medium text-sm">Error en procesamiento de pagos</h4>
+                                    <span class="text-xs text-camel-black/50">Hace 30 min</span>
+                                </div>
+                                <p class="text-xs mt-1">La pasarela de pagos está reportando errores de conexión. Se requiere atención inmediata.</p>
+                                <div class="flex justify-end mt-2">
+                                    <button class="text-xs text-neon-red font-medium">Resolver</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Alert item 2 -->
+                            <div class="p-3 rounded-lg border-l-4 border-status-warning bg-status-warning/5">
+                                <div class="flex justify-between">
+                                    <h4 class="font-medium text-sm">Alto uso de CPU</h4>
+                                    <span class="text-xs text-camel-black/50">Hace 45 min</span>
+                                </div>
+                                <p class="text-xs mt-1">El servidor principal está experimentando un uso de CPU superior al 85% durante los últimos 15 minutos.</p>
+                                <div class="flex justify-end mt-2">
+                                    <button class="text-xs text-status-warning font-medium">Monitorear</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Alert item 3 -->
+                            <div class="p-3 rounded-lg border-l-4 border-status-info bg-status-info/5">
+                                <div class="flex justify-between">
+                                    <h4 class="font-medium text-sm">Actualización programada</h4>
+                                    <span class="text-xs text-camel-black/50">Hace 1 hora</span>
+                                </div>
+                                <p class="text-xs mt-1">Se ha programado una actualización del sistema para mañana a las 02:00 AM. Duración estimada: 30 minutos.</p>
+                                <div class="flex justify-end mt-2">
+                                    <button class="text-xs text-status-info font-medium">Detalles</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Alert item 4 -->
+                            <div class="p-3 rounded-lg border-l-4 border-status-success bg-status-success/5">
+                                <div class="flex justify-between">
+                                    <h4 class="font-medium text-sm">Backup completado</h4>
+                                    <span class="text-xs text-camel-black/50">Hace 2 horas</span>
+                                </div>
+                                <p class="text-xs mt-1">El backup diario de la base de datos se ha completado exitosamente. Tamaño: 4.2 GB.</p>
+                                <div class="flex justify-end mt-2">
+                                    <button class="text-xs text-status-success font-medium">Ver log</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- User management -->
+            <div class="mb-8">
+                <div class="flex flex-wrap items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold">Gestión de Usuarios</h2>
+                    <div class="flex items-center gap-2">
+                        <div class="relative">
+                            <input type="text" placeholder="Buscar usuario..." class="pl-10 pr-4 py-2 rounded-lg border border-camel-tan/30 focus:outline-none focus:ring-2 focus:ring-camel-tan/50">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-camel-black/50" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <button class="bg-camel-tan text-camel-white py-2 px-4 rounded-lg hover:bg-camel-tan/90 transition-colors flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Añadir Usuario</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-camel-white rounded-xl shadow-md overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="data-table w-full">
+                            <thead>
+                                <tr class="bg-camel-lightBeige">
+                                    <th class="px-4 py-3 text-left text-sm font-medium">Usuario</th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium">Tipo</th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium">Email</th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium">Estado</th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium">Registro</th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- User row 1 -->
+                                <tr class="border-b border-camel-tan/10">
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-full bg-camel-tan flex items-center justify-center text-camel-white font-bold">
+                                                <span>CR</span>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium">Carlos Rodríguez</p>
+                                                <p class="text-xs text-camel-black/60">@carlosdev</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <span class="px-2 py-1 bg-camel-tan/10 text-camel-tan text-xs font-medium rounded-md">Freelancer</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">freelancer@camello.co</td>
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center">
+                                            <span class="status-indicator status-active"></span>
+                                            <span class="text-sm">Activo</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">15/03/2022</td>
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center gap-2">
+                                            <button class="p-1 rounded-md hover:bg-camel-cream transition-colors tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-black/70" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                                </svg>
+                                                <span class="tooltip-text">Editar</span>
+                                            </button>
+                                            <button class="p-1 rounded-md hover:bg-camel-cream transition-colors tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-black/70" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">Suspender</span>
+                                            </button>
+                                            <button class="p-1 rounded-md hover:bg-camel-cream transition-colors tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-black/70" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">Eliminar</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <!-- User row 2 -->
+                                <tr class="border-b border-camel-tan/10">
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-camel-white font-bold">
+                                                <span>AG</span>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium">Ana Gómez</p>
+                                                <p class="text-xs text-camel-black/60">InnovaTech Colombia</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <span class="px-2 py-1 bg-neon-purple/10 text-neon-purple text-xs font-medium rounded-md">Empresa</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">empresa@camello.co</td>
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center">
+                                            <span class="status-indicator status-active"></span>
+                                            <span class="text-sm">Activo</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">10/11/2021</td>
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center gap-2">
+                                            <button class="p-1 rounded-md hover:bg-camel-cream transition-colors tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-black/70" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                                </svg>
+                                                <span class="tooltip-text">Editar</span>
+                                            </button>
+                                            <button class="p-1 rounded-md hover:bg-camel-cream transition-colors tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-black/70" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">Suspender</span>
+                                            </button>
+                                            <button class="p-1 rounded-md hover:bg-camel-cream transition-colors tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-black/70" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">Eliminar</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <!-- User row 3 -->
+                                <tr class="border-b border-camel-tan/10">
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center text-camel-white font-bold">
+                                                <span>JM</span>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium">Javier Martínez</p>
+                                                <p class="text-xs text-camel-black/60">@admin_javier</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <span class="px-2 py-1 bg-camel-black text-camel-white text-xs font-medium rounded-md">Admin</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">admin@camello.co</td>
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center">
+                                            <span class="status-indicator status-active"></span>
+                                            <span class="text-sm">Activo</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">05/01/2021</td>
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center gap-2">
+                                            <button class="p-1 rounded-md hover:bg-camel-cream transition-colors tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-black/70" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                                </svg>
+                                                <span class="tooltip-text">Editar</span>
+                                            </button>
+                                            <button class="p-1 rounded-md hover:bg-camel-cream transition-colors tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-black/70" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">Suspender</span>
+                                            </button>
+                                            <button class="p-1 rounded-md hover:bg-camel-cream transition-colors tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-black/70" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">Eliminar</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <!-- User row 4 -->
+                                <tr class="border-b border-camel-tan/10">
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center text-camel-white font-bold">
+                                                <span>LM</span>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium">Laura Martínez</p>
+                                                <p class="text-xs text-camel-black/60">@lauradesign</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <span class="px-2 py-1 bg-camel-tan/10 text-camel-tan text-xs font-medium rounded-md">Freelancer</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">laura@camello.co</td>
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center">
+                                            <span class="status-indicator status-pending"></span>
+                                            <span class="text-sm">Pendiente</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">22/04/2022</td>
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center gap-2">
+                                            <button class="p-1 rounded-md hover:bg-camel-cream transition-colors tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-black/70" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                                </svg>
+                                                <span class="tooltip-text">Editar</span>
+                                            </button>
+                                            <button class="p-1 rounded-md hover:bg-camel-cream transition-colors tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-black/70" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">Suspender</span>
+                                            </button>
+                                            <button class="p-1 rounded-md hover:bg-camel-cream transition-colors tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-black/70" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">Eliminar</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <!-- User row 5 -->
+                                <tr>
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-camel-white font-bold">
+                                                <span>DP</span>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium">Daniel Pérez</p>
+                                                <p class="text-xs text-camel-black/60">TechWave</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <span class="px-2 py-1 bg-neon-purple/10 text-neon-purple text-xs font-medium rounded-md">Empresa</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">daniel@techwave.co</td>
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center">
+                                            <span class="status-indicator status-inactive"></span>
+                                            <span class="text-sm">Inactivo</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">18/02/2022</td>
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center gap-2">
+                                            <button class="p-1 rounded-md hover:bg-camel-cream transition-colors tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-black/70" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                                </svg>
+                                                <span class="tooltip-text">Editar</span>
+                                            </button>
+                                            <button class="p-1 rounded-md hover:bg-camel-cream transition-colors tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-status-success" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">Activar</span>
+                                            </button>
+                                            <button class="p-1 rounded-md hover:bg-camel-cream transition-colors tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-black/70" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">Eliminar</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="flex items-center justify-between px-4 py-3 bg-camel-cream/50 border-t border-camel-tan/10">
+                        <div class="flex items-center text-sm text-camel-black/70">
+                            <span>Mostrando 1-5 de 156 usuarios</span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <button class="w-8 h-8 flex items-center justify-center rounded-md border border-camel-tan/30 text-camel-black/70 hover:bg-camel-tan hover:text-camel-white transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <button class="w-8 h-8 flex items-center justify-center rounded-md bg-camel-tan text-camel-white">1</button>
+                            <button class="w-8 h-8 flex items-center justify-center rounded-md border border-camel-tan/30 text-camel-black hover:bg-camel-tan hover:text-camel-white transition-colors">2</button>
+                            <button class="w-8 h-8 flex items-center justify-center rounded-md border border-camel-tan/30 text-camel-black hover:bg-camel-tan hover:text-camel-white transition-colors">3</button>
+                            <span class="w-8 h-8 flex items-center justify-center">...</span>
+                            <button class="w-8 h-8 flex items-center justify-center rounded-md border border-camel-tan/30 text-camel-black hover:bg-camel-tan hover:text-camel-white transition-colors">32</button>
+                            <button class="w-8 h-8 flex items-center justify-center rounded-md border border-camel-tan/30 text-camel-black/70 hover:bg-camel-tan hover:text-camel-white transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Sidebar toggle
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const mobileSidebarToggle = document.getElementById('mobile-sidebar-toggle');
+        
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            
+            if (sidebar.classList.contains('collapsed')) {
+                mainContent.classList.remove('sidebar-expanded');
+                mainContent.classList.add('sidebar-collapsed');
+            } else {
+                mainContent.classList.remove('sidebar-collapsed');
+                mainContent.classList.add('sidebar-expanded');
+            }
+        });
+        
+        mobileSidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+        
+        // Responsive adjustments
+        function handleResize() {
+            if (window.innerWidth < 768) {
+                sidebar.classList.remove('collapsed');
+                mainContent.classList.remove('sidebar-expanded', 'sidebar-collapsed');
+            } else {
+                if (!sidebar.classList.contains('collapsed')) {
+                    mainContent.classList.add('sidebar-expanded');
+                    mainContent.classList.remove('sidebar-collapsed');
+                } else {
+                    mainContent.classList.add('sidebar-collapsed');
+                    mainContent.classList.remove('sidebar-expanded');
+                }
+            }
+        }
+        
+        window.addEventListener('resize', handleResize);
+        handleResize();
+        
+        // Activity Chart
+        const activityCtx = document.getElementById('activityChart').getContext('2d');
+        const activityChart = new Chart(activityCtx, {
+            type: 'line',
+            data: {
+                labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
+                datasets: [
+                    {
+                        label: 'Freelancers',
+                        data: [65, 78, 52, 91, 83, 56, 80],
+                        borderColor: '#8A2BE2',
+                        backgroundColor: 'rgba(138, 43, 226, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'Empresas',
+                        data: [28, 48, 40, 19, 36, 27, 40],
+                        borderColor: '#D2B48C',
+                        backgroundColor: 'rgba(210, 180, 140, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'Proyectos',
+                        data: [12, 19, 13, 25, 18, 10, 22],
+                        borderColor: '#4D4DFF',
+                        backgroundColor: 'rgba(77, 77, 255, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(210, 180, 140, 0.1)',
+                            borderDash: [5, 5]
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+        
+        // User Distribution Chart
+        const userDistributionCtx = document.getElementById('userDistributionChart').getContext('2d');
+        const userDistributionChart = new Chart(userDistributionCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Freelancers', 'Empresas', 'Administradores'],
+                datasets: [{
+                    data: [68, 28, 4],
+                    backgroundColor: [
+                        '#D2B48C',
+                        '#8A2BE2',
+                        '#000000'
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+        
+        // Notifications dropdown (simplified for demo)
+        const notificationsBtn = document.getElementById('notifications-btn');
+        
+        notificationsBtn.addEventListener('click', () => {
+            alert('Notificaciones: Tienes 8 notificaciones sin leer.');
+        });
+        
+        // Tasks dropdown (simplified for demo)
+        const tasksBtn = document.getElementById('tasks-btn');
+        
+        tasksBtn.addEventListener('click', () => {
+            alert('Tareas: Tienes 5 tareas pendientes.');
+        });
+        
+        // Simulate real-time data updates
+        function updateRealTimeData() {
+            // Update active users count randomly
+            const activeUsersElement = document.querySelector('.data-card:nth-child(1) .text-3xl');
+            if (activeUsersElement) {
+                const currentUsers = parseInt(activeUsersElement.textContent.replace(',', ''));
+                const change = Math.floor(Math.random() * 11) - 5; // Random change between -5 and +5
+                activeUsersElement.textContent = (currentUsers + change).toLocaleString();
+            }
+            
+            // Update chart data
+            if (activityChart) {
+                activityChart.data.datasets.forEach(dataset => {
+                    dataset.data = dataset.data.map(value => {
+                        const change = Math.floor(Math.random() * 5) - 2; // Random change between -2 and +2
+                        return Math.max(0, value + change);
+                    });
+                });
+                activityChart.update();
+            }
+            
+            // Schedule next update
+            setTimeout(updateRealTimeData, 5000);
+        }
+        
+        // Start real-time data updates
+        updateRealTimeData();
+    </script>
+</body>
+</html>
+

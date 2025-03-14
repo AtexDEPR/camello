@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Freelancer - Camello | La Plataforma Freelance de Colombia</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        camel: {
+                            tan: '#D2B48C',
+                            lightBeige: '#F6ECD4',
+                            goldenBeige: '#DBC29D',
+                            cream: '#FFF9E8',
+                            white: '#FFFFFF',
+                            black: '#000000'
+                        },
+                        neon: {
+                            purple: '#8A2BE2',
+                            glow: 'rgba(138, 43, 226, 0.6)'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 0.8s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'slide-right': 'slideRight 0.8s ease-out forwards',
+                        'scale-in': 'scaleIn 0.8s ease-out forwards',
+                        'glow': 'glow 1.5s ease-in-out infinite alternate'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideRight: {
+                            '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        scaleIn: {
+                            '0%': { transform: 'scale(0.9)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #8A2BE2, 0 0 10px #8A2BE2' },
+                            '100%': { boxShadow: '0 0 10px #8A2BE2, 0 0 20px #8A2BE2, 0 0 30px #8A2BE2' }
+                        }
+                    },
+                    backgroundImage: {
+                        'circuit-pattern': "url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23DBC29D' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+                        'tech-pattern': "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23DBC29D' fill-opacity='0.1'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        /* Custom animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideRight {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px #8A2BE2, 0 0 10px #8A2BE2; }
+            100% { box-shadow: 0 0 10px #8A2BE2, 0 0 20px #8A2BE2, 0 0 30px #8A2BE2; }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-right {
+            animation: slideRight 0.8s ease-out forwards;
+        }
+        
+        .animate-scale-in {
+            animation: scaleIn 0.8s ease-out forwards;
+        }
+        
+        .animate-glow {
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+        
+        /* Staggered animation delay */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #D2B48C, #DBC29D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        /* Circuit board animation */
+        .circuit-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 3s linear forwards;
+        }
+        
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        /* Neon border effect */
+        .neon-border {
+            border: 2px solid #8A2BE2;
+            box-shadow: 0 0 5px #8A2BE2, 0 0 10px #8A2BE2;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+        
+        /* Sidebar styles */
+        .sidebar {
+            width: 320px;
+            transition: all 0.3s ease;
+            
+        }
+        
+        .sidebar.collapsed {
+            width: 80px;
+        }
+        
+        .sidebar-item span {
+            transition: opacity 0.3s ease;
+        }
+        
+        .sidebar.collapsed .sidebar-item span {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .sidebar.collapsed .sidebar-logo span {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .sidebar.collapsed .sidebar-toggle svg {
+            transform: rotate(180deg);
+        }
+        
+        .main-content {
+            transition: margin-left 0.3s ease;
+        }
+        
+        .main-content.sidebar-expanded {
+            margin-left: 280px;
+        }
+        
+        .main-content.sidebar-collapsed {
+            margin-left: 80px;
+        }
+        
+        /* Category selector */
+        .category-selector {
+            transition: all 0.3s ease;
+        }
+        
+        .category-selector:hover {
+            transform: translateY(-2px);
+        }
+        
+        .category-selector.active {
+            border-color: #D2B48C;
+            background-color: #F6ECD4;
+        }
+
+        .scroll-hidden::-webkit-scrollbar {
+            display: none;
+        }
+
+    </style>
+</head>
+<body class="bg-camel-cream text-camel-black font-sans min-h-screen">
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar fixed top-0 left-0 h-full w-40 bg-camel-white shadow-lg z-40 overflow-y-auto">
+        <div class="p-4">
+            <!-- Logo -->
+            <div class="sidebar-logo flex items-center gap-3 mb-8">
+                <div class="relative w-10 h-10 bg-white rounded-full flex items-center justify-center text-camel-white font-bold shadow-lg overflow-hidden">
+                    <div class="absolute inset-0 bg-circuit-pattern opacity-20"></div>
+                    <span class="relative z-10"><img src="./fotos_facheras/camello.png" alt=""></span>
+                    <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-camel-cream rounded-full animate-pulse-slow"></div>
+                </div>
+                <span class="text-2xl font-bold gradient-text">Camello</span>
+            </div>
+            
+            <!-- User info -->
+            <div class="mb-8">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-12 h-12 rounded-full bg-camel-tan flex items-center justify-center text-camel-white font-bold">
+                        <span>CR</span>
+                    </div>
+                    <div>
+                        <h3 class="font-medium">Carlos Rodríguez</h3>
+                        <p class="text-sm text-camel-black/60">Desarrollador Full Stack</p>
+                    </div>
+                </div>
+                <div class="bg-camel-lightBeige rounded-lg p-3 mt-3">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-xs text-camel-black/70">Perfil completado</span>
+                        <span class="text-xs font-medium">85%</span>
+                    </div>
+                    <div class="w-full h-2 bg-camel-white rounded-full">
+                        <div class="h-2 bg-camel-tan rounded-full" style="width: 85%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Menu items -->
+            <nav class="space-y-1">
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-lg bg-camel-lightBeige text-camel-black hover:bg-camel-tan hover:text-camel-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-lg text-camel-black hover:bg-camel-tan hover:text-camel-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+                        <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                    </svg>
+                    <span>Mis Proyectos</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-lg text-camel-black hover:bg-camel-tan hover:text-camel-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Ofertas Disponibles</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-lg text-camel-black hover:bg-camel-tan hover:text-camel-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Mensajes</span>
+                    <span class="ml-auto bg-camel-tan text-camel-white text-xs font-medium px-2 py-0.5 rounded-full">3</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-lg text-camel-black hover:bg-camel-tan hover:text-camel-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Mi Perfil</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-lg text-camel-black hover:bg-camel-tan hover:text-camel-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Configuración</span>
+                </a>
+                <a href="login.html" class="sidebar-item flex items-center gap-3 p-3 rounded-lg text-camel-black hover:bg-red-500 hover:text-camel-white transition-colors mt-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Cerrar Sesión</span>
+                </a>
+            </nav>
+        </div>
+        
+        <!-- Sidebar toggle button -->
+        <button id="sidebar-toggle" class="sidebar-toggle absolute top-1/2 -right-3 transform -translate-y-1/2 w-6 h-12 bg-camel-tan rounded-r-md flex items-center justify-center text-camel-white ">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Main content -->
+    <div id="main-content" class="main-content sidebar-expanded min-h-screen">
+        <!-- Header -->
+        <header class="sticky top-0 z-30 glass border-b border-camel-tan/20">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold">Ofertas Disponibles</h1>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Buscar ofertas..." class="pl-10 pr-4 py-2 rounded-lg border border-camel-tan/30 focus:outline-none focus:ring-2 focus:ring-camel-tan/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-camel-black/50" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    
+                    <div class="relative">
+                        <button id="notifications-btn" class="relative p-2 rounded-full hover:bg-camel-lightBeige transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                            </svg>
+                            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                    </div>
+                    
+                    <div class="h-8 w-px bg-camel-tan/20"></div>
+                    
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-camel-tan flex items-center justify-center text-camel-white font-bold">
+                            <span>CR</span>
+                        </div>
+                        <span class="text-sm font-medium hidden md:block">Carlos Rodríguez</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main content area -->
+        <div class="container mx-auto px-4 py-8">
+            <!-- Category selector -->
+            <div class="mb-8">
+                <h2 class="text-xl font-bold mb-4">Selecciona una categoría</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div class="category-selector active p-4 border border-camel-tan/30 rounded-lg cursor-pointer hover:shadow-md transition-all">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-camel-tan/20 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">Desarrollo y Tecnología</h3>
+                                <p class="text-xs text-camel-black/60">42 ofertas disponibles</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-selector p-4 border border-camel-tan/30 rounded-lg cursor-pointer hover:shadow-md transition-all">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-camel-tan/20 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">Contenido y Multimedia</h3>
+                                <p class="text-xs text-camel-black/60">28 ofertas disponibles</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-selector p-4 border border-camel-tan/30 rounded-lg cursor-pointer hover:shadow-md transition-all">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-camel-tan/20 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">Marketing y Estrategia</h3>
+                                <p class="text-xs text-camel-black/60">35 ofertas disponibles</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-selector p-4 border border-camel-tan/30 rounded-lg cursor-pointer hover:shadow-md transition-all">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-camel-tan/20 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">Educación y Asesoría</h3>
+                                <p class="text-xs text-camel-black/60">19 ofertas disponibles</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-selector p-4 border border-camel-tan/30 rounded-lg cursor-pointer hover:shadow-md transition-all">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-camel-tan/20 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">E-Commerce</h3>
+                                <p class="text-xs text-camel-black/60">23 ofertas disponibles</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-selector p-4 border border-camel-tan/30 rounded-lg cursor-pointer hover:shadow-md transition-all">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-camel-tan/20 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">Data y Análisis</h3>
+                                <p class="text-xs text-camel-black/60">17 ofertas disponibles</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-selector p-4 border border-camel-tan/30 rounded-lg cursor-pointer hover:shadow-md transition-all">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-camel-tan/20 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">Otros trabajos digitales</h3>
+                                <p class="text-xs text-camel-black/60">14 ofertas disponibles</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ofertas de Desarrollo y Tecnología -->
+            <div class="mb-12">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold">Desarrollo y Tecnología</h2>
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm text-camel-black/70">Ordenar por:</span>
+                        <select class="bg-camel-cream border border-camel-tan/30 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-camel-tan/50">
+                            <option>Más recientes</option>
+                            <option>Mejor pagados</option>
+                            <option>Más populares</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Ofertas boosteadas -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                  <!-- Oferta boosteada 1 -->
+                  <div class="neon-border rounded-xl overflow-hidden bg-camel-white shadow-lg animate-glow">
+                      <div class="p-6">
+                          <div class="flex justify-between items-start mb-4">
+                              <div class="flex items-center gap-3">
+                                  <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold">
+                                      <span>IT</span>
+                                  </div>
+                                  <div>
+                                      <h3 class="font-bold text-lg">InnovaTech Colombia</h3>
+                                      <div class="flex items-center gap-2 text-sm text-camel-black/70">
+                                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                          </svg>
+                                          <span>Medellín, Colombia (Remoto)</span>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="flex items-center gap-1 bg-neon-purple/10 text-neon-purple px-2 py-1 rounded-full text-xs font-medium">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd" />
+                                  </svg>
+                                  <span>Destacado</span>
+                              </div>
+                          </div>
+                          
+                          <h4 class="text-lg font-bold mb-2">Desarrollo de API REST para sistema de gestión empresarial</h4>
+                          
+                          <div class="flex flex-wrap gap-2 mb-4">
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">React</span>
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">Node.js</span>
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">MongoDB</span>
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">Express</span>
+                          </div>
+                          
+                          <p class="text-camel-black/80 mb-4">Buscamos un desarrollador freelance para crear una API REST completa para nuestro sistema de gestión empresarial. El proyecto tiene una duración estimada de 2 meses con posibilidad de extenderse para mantenimiento. Trabajo 100% remoto con reuniones semanales de seguimiento...</p>
+                          
+                          <div class="flex items-center justify-between mb-4">
+                              <div class="flex items-center gap-2">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                  </svg>
+                                  <span class="text-sm">Publicado hace 2 días</span>
+                              </div>
+                              <div class="flex items-center gap-2">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                  </svg>
+                                  <span class="font-bold">$13.000.000 - $17.000.000 COP</span>
+                              </div>
+                          </div>
+                          
+                          <div class="flex items-center gap-3">
+                              <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">Leer más</a>
+                              <button class="flex-1 bg-camel-black text-camel-white py-2.5 px-4 rounded-lg hover:bg-camel-black/90 transition-colors relative overflow-hidden group">
+                                  <span class="relative z-10">Aplicar ahora</span>
+                                  <span class="absolute inset-0 w-0 bg-neon-purple/30 transition-all duration-300 group-hover:w-full"></span>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <!-- Oferta boosteada 2 -->
+                  <div class="neon-border rounded-xl overflow-hidden bg-camel-white shadow-lg animate-glow">
+                      <div class="p-6">
+                          <div class="flex justify-between items-start mb-4">
+                              <div class="flex items-center gap-3">
+                                  <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center text-white font-bold">
+                                      <span>DS</span>
+                                  </div>
+                                  <div>
+                                      <h3 class="font-bold text-lg">DataSolutions</h3>
+                                      <div class="flex items-center gap-2 text-sm text-camel-black/70">
+                                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                          </svg>
+                                          <span>Bogotá, Colombia (Remoto)</span>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="flex items-center gap-1 bg-neon-purple/10 text-neon-purple px-2 py-1 rounded-full text-xs font-medium">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd" />
+                                  </svg>
+                                  <span>Destacado</span>
+                              </div>
+                          </div>
+                          
+                          <h4 class="text-lg font-bold mb-2">Auditoría de seguridad y análisis de vulnerabilidades</h4>
+                          
+                          <div class="flex flex-wrap gap-2 mb-4">
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">Pentesting</span>
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">Análisis de vulnerabilidades</span>
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">Seguridad en la nube</span>
+                          </div>
+                          
+                          <p class="text-camel-black/80 mb-4">Necesitamos un especialista en ciberseguridad para realizar una auditoría completa de nuestros sistemas y aplicaciones web. El proyecto incluye pentesting, análisis de vulnerabilidades y recomendaciones de mejora. Se requiere experiencia comprobable en seguridad informática...</p>
+                          
+                          <div class="flex items-center justify-between mb-4">
+                              <div class="flex items-center gap-2">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                  </svg>
+                                  <span class="text-sm">Publicado hace 1 día</span>
+                              </div>
+                              <div class="flex items-center gap-2">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                  </svg>
+                                  <span class="font-bold">$15.000.000 - $20.000.000 COP</span>
+                              </div>
+                          </div>
+                          
+                          <div class="flex items-center gap-3">
+                              <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">Leer más</a>
+                              <button class="flex-1 bg-camel-black text-camel-white py-2.5 px-4 rounded-lg hover:bg-camel-black/90 transition-colors relative overflow-hidden group">
+                                  <span class="relative z-10">Aplicar ahora</span>
+                                  <span class="absolute inset-0 w-0 bg-neon-purple/30 transition-all duration-300 group-hover:w-full"></span>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+                
+                <!-- Ofertas regulares -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <!-- Oferta regular 1 -->
+                  <div class="rounded-xl overflow-hidden bg-camel-white shadow-md hover:shadow-lg transition-shadow">
+                      <div class="p-6">
+                          <div class="flex justify-between items-start mb-4">
+                              <div class="flex items-center gap-3">
+                                  <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-white font-bold">
+                                      <span>TW</span>
+                                  </div>
+                                  <div>
+                                      <h3 class="font-bold text-lg">TechWave</h3>
+                                      <div class="flex items-center gap-2 text-sm text-camel-black/70">
+                                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                          </svg>
+                                          <span>Cali, Colombia (Remoto)</span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          
+                          <h4 class="text-lg font-bold mb-2">Desarrollo de aplicación móvil para delivery</h4>
+                          
+                          <div class="flex flex-wrap gap-2 mb-4">
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">Flutter</span>
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">Firebase</span>
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">iOS</span>
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">Android</span>
+                          </div>
+                          
+                          <p class="text-camel-black/80 mb-4">Buscamos un desarrollador freelance para crear una aplicación móvil de delivery para restaurantes locales. Se requiere experiencia en Flutter y Firebase. El proyecto incluye desarrollo de interfaces, integración con APIs de pagos y sistema de geolocalización...</p>
+                          
+                          <div class="flex items-center justify-between mb-4">
+                              <div class="flex items-center gap-2">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                  </svg>
+                                  <span class="text-sm">Publicado hace 3 días</span>
+                              </div>
+                              <div class="flex items-center gap-2">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                  </svg>
+                                  <span class="font-bold">$10.500.000 - $13.000.000 COP</span>
+                              </div>
+                          </div>
+                          
+                          <div class="flex items-center gap-3">
+                              <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">Leer más</a>
+                              <button class="flex-1 bg-camel-black text-camel-white py-2.5 px-4 rounded-lg hover:bg-camel-black/90 transition-colors relative overflow-hidden group">
+                                  <span class="relative z-10">Aplicar ahora</span>
+                                  <span class="absolute inset-0 w-0 bg-camel-tan/20 transition-all duration-300 group-hover:w-full"></span>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <!-- Oferta regular 2 -->
+                  <div class="rounded-xl overflow-hidden bg-camel-white shadow-md hover:shadow-lg transition-shadow">
+                      <div class="p-6">
+                          <div class="flex justify-between items-start mb-4">
+                              <div class="flex items-center gap-3">
+                                  <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-400 to-cyan-600 flex items-center justify-center text-white font-bold">
+                                      <span>CS</span>
+                                  </div>
+                                  <div>
+                                      <h3 class="font-bold text-lg">CloudSoft</h3>
+                                      <div class="flex items-center gap-2 text-sm text-camel-black/70">
+                                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                          </svg>
+                                          <span>Remoto</span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          
+                          <h4 class="text-lg font-bold mb-2">Migración de infraestructura a AWS</h4>
+                          
+                          <div class="flex flex-wrap gap-2 mb-4">
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">AWS</span>
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">DevOps</span>
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">Docker</span>
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">Kubernetes</span>
+                          </div>
+                          
+                          <p class="text-camel-black/80 mb-4">Necesitamos un especialista en Cloud Computing para migrar nuestra infraestructura actual a AWS. El proyecto incluye configuración de servidores, implementación de contenedores Docker y optimización de costos. Se valorará experiencia en arquitecturas serverless...</p>
+                          
+                          <div class="flex items-center justify-between mb-4">
+                              <div class="flex items-center gap-2">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                  </svg>
+                                  <span class="text-sm">Publicado hace 5 días</span>
+                              </div>
+                              <div class="flex items-center gap-2">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                  </svg>
+                                  <span class="font-bold">$12.000.000 - $15.000.000 COP</span>
+                              </div>
+                          </div>
+                          
+                          <div class="flex items-center gap-3">
+                              <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">Leer más</a>
+                              <button class="flex-1 bg-camel-black text-camel-white py-2.5 px-4 rounded-lg hover:bg-camel-black/90 transition-colors relative overflow-hidden group">
+                                  <span class="relative z-10">Aplicar ahora</span>
+                                  <span class="absolute inset-0 w-0 bg-camel-tan/20 transition-all duration-300 group-hover:w-full"></span>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <!-- Oferta regular 3 -->
+                  <div class="rounded-xl overflow-hidden bg-camel-white shadow-md hover:shadow-lg transition-shadow">
+                      <div class="p-6">
+                          <div class="flex justify-between items-start mb-4">
+                              <div class="flex items-center gap-3">
+                                  <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white font-bold">
+                                      <span>GD</span>
+                                  </div>
+                                  <div>
+                                      <h3 class="font-bold text-lg">GameDev Studios</h3>
+                                      <div class="flex items-center gap-2 text-sm text-camel-black/70">
+                                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                          </svg>
+                                          <span>Barranquilla, Colombia (Híbrido)</span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          
+                          <h4 class="text-lg font-bold mb-2">Desarrollo de videojuego educativo en Unity</h4>
+                          
+                          <div class="flex flex-wrap gap-2 mb-4">
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">Unity</span>
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">C#</span>
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">3D</span>
+                              <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">Animación</span>
+                          </div>
+                          
+                          <p class="text-camel-black/80 mb-4">Buscamos un desarrollador de videojuegos para crear un juego educativo orientado a niños de primaria. El proyecto incluye diseño de niveles, programación de mecánicas de juego y optimización para dispositivos móviles. Se requiere portafolio con ejemplos previos...</p>
+                          
+                          <div class="flex items-center justify-between mb-4">
+                              <div class="flex items-center gap-2">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                  </svg>
+                                  <span class="text-sm">Publicado hace 1 semana</span>
+                              </div>
+                              <div class="flex items-center gap-2">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                  </svg>
+                                  <span class="font-bold">$9.500.000 - $14.000.000 COP</span>
+                              </div>
+                          </div>
+                          
+                          <div class="flex items-center gap-3">
+                              <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">Leer más</a>
+                              <button class="flex-1 bg-camel-black text-camel-white py-2.5 px-4 rounded-lg hover:bg-camel-black/90 transition-colors relative overflow-hidden group">
+                                  <span class="relative z-10">Aplicar ahora</span>
+                                  <span class="absolute inset-0 w-0 bg-camel-tan/20 transition-all duration-300 group-hover:w-full"></span>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+                    
+                  <!-- Oferta regular 4 -->
+                  <div class="rounded-xl overflow-hidden bg-camel-white shadow-md hover:shadow-lg transition-shadow">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center text-white font-bold">
+                                    <span>ST</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg">SecureTech</h3>
+                                    <div class="flex items-center gap-2 text-sm text-camel-black/70">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span>Remoto</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h4 class="text-lg font-bold mb-2">Desarrollo de bots para automatización de procesos</h4>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">UiPath</span>
+                            <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">Python</span>
+                            <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">RPA</span>
+                            <span class="bg-camel-lightBeige text-camel-black px-2 py-1 rounded-md text-xs">Automatización</span>
+                        </div>
+                        
+                        <p class="text-camel-black/80 mb-4">Buscamos un especialista en RPA para desarrollar bots que automaticen procesos administrativos y de atención al cliente. El proyecto incluye análisis de procesos actuales, desarrollo de soluciones y capacitación al personal. Ideal para freelancers con experiencia en UiPath o Python...</p>
+                        
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-sm">Publicado hace 4 días</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-camel-tan" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="font-bold">$8.500.000 - $13.500.000 COP</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-3">
+                            <a href="#" class="text-camel-tan hover:text-camel-black transition-colors">Leer más</a>
+                            <button class="flex-1 bg-camel-black text-camel-white py-2.5 px-4 rounded-lg hover:bg-camel-black/90 transition-colors relative overflow-hidden group">
+                                <span class="relative z-10">Aplicar ahora</span>
+                                <span class="absolute inset-0 w-0 bg-camel-tan/20 transition-all duration-300 group-hover:w-full"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+                <!-- Paginación -->
+                <div class="flex justify-center mt-8">
+                    <nav class="flex items-center gap-1">
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-lg border border-camel-tan/30 text-camel-black hover:bg-camel-lightBeige transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-lg bg-camel-tan text-camel-white">1</a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-lg border border-camel-tan/30 text-camel-black hover:bg-camel-lightBeige transition-colors">2</a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-lg border border-camel-tan/30 text-camel-black hover:bg-camel-lightBeige transition-colors">3</a>
+                        <span class="w-10 h-10 flex items-center justify-center">...</span>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-lg border border-camel-tan/30 text-camel-black hover:bg-camel-lightBeige transition-colors">8</a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-lg border border-camel-tan/30 text-camel-black hover:bg-camel-lightBeige transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Sidebar toggle
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            
+            if (sidebar.classList.contains('collapsed')) {
+                mainContent.classList.remove('sidebar-expanded');
+                mainContent.classList.add('sidebar-collapsed');
+            } else {
+                mainContent.classList.remove('sidebar-collapsed');
+                mainContent.classList.add('sidebar-expanded');
+            }
+        });
+        
+        // Category selectors
+        const categorySelectors = document.querySelectorAll('.category-selector');
+        
+        categorySelectors.forEach(selector => {
+            selector.addEventListener('click', () => {
+                // Remove active class from all selectors
+                categorySelectors.forEach(s => s.classList.remove('active'));
+                
+                // Add active class to clicked selector
+                selector.classList.add('active');
+                
+                // In a real application, this would fetch and display the corresponding offers
+                // For this demo, we'll just show a message
+                console.log('Category selected:', selector.querySelector('h3').textContent);
+            });
+        });
+        
+        // Notifications dropdown (simplified for demo)
+        const notificationsBtn = document.getElementById('notifications-btn');
+        
+        notificationsBtn.addEventListener('click', () => {
+            alert('Notificaciones: Tienes 3 nuevas ofertas que coinciden con tu perfil.');
+        });
+    </script>
+</body>
+</html>

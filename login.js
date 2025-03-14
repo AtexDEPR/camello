@@ -6,9 +6,9 @@ const CONFIG = {
   MAX_LOGIN_ATTEMPTS: 5,
   LOCKOUT_TIME: 15 * 60 * 1000, // 15 minutos en milisegundos
   REDIRECT_URLS: {
-      freelancer: 'freelancer-dashboard.html',
-      company: 'company-dashboard.html',
-      admin: 'admin-panel.html'
+      freelancer: './freelancer-dashboard.html',
+      company: './company-dashboard.html',
+      admin: './admin-panel.html'
   },
   TOAST_DURATION: 3000
 };
